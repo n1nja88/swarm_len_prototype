@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,17 @@
 <body>
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background"></div>
+        <div class="hero-background">
+            <canvas id="heroParticlesCanvas"></canvas>
+        </div>
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Decentralized AI-Platform</h1>
-                <h2>Distributed Inference, GPU-powered, Agents Store</h2>
-                <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+                <h1 data-i18n="heroTitle">Decentralized AI-Platform</h1>
+                <h2 data-i18n="heroSubtitle">Distributed Inference, GPU-powered, Agents Store</h2>
+                <div class="hero-buttons">
+                    <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
+                    <button class="login-button" onclick="openLogin()" data-i18n="login">login</button>
+                </div>
             </div>
         </div>
     </section>
@@ -24,28 +29,32 @@
         <div class="container">
             <div class="about-swar-content">
                 <div class="about-swar-left">
-                    <h2>About SwarMind</h2>
-                    <p>We are building a decentralized AI platform that simplifies deploying and scaling inference models and GPU infrastructure for businesses and developers.</p>
-                    <p>Our mission is to make powerful AI technologies accessible, transparent, and cost-efficient for building and monetizing AI solutions.</p>
-                    <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+                    <h2 data-i18n="aboutSwarMind">About SwarMind</h2>
+                    <p data-i18n="aboutSwarMindDesc1">We are building a decentralized AI platform that simplifies deploying and scaling inference models and GPU infrastructure for businesses and developers.</p>
+                    <p data-i18n="aboutSwarMindDesc2">Our mission is to make powerful AI technologies accessible, transparent, and cost-efficient for building and monetizing AI solutions.</p>
+                    <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
                 </div>
                 <div class="about-swar-right">
                     <div class="swar-card">
                         <div class="swar-card-icon">
-                            <div class="icon-play"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
                         </div>
                         <div class="swar-card-content">
-                            <h3>Quick Start</h3>
-                            <p>OpenAI-compatible API. десятки популярных моделей для всех типов задач, оперативная тех-поддержка.</p>
+                            <h3 data-i18n="quickStart">Quick Start</h3>
+                            <p data-i18n="quickStartDesc">OpenAI-compatible API. Dozens of popular models for all types of tasks, responsive technical support.</p>
                         </div>
                     </div>
                     <div class="swar-card">
                         <div class="swar-card-icon">
-                            <div class="icon-chart"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
                         </div>
                         <div class="swar-card-content">
-                            <h3>Экономия на инфраструктуре</h3>
-                            <p>Арендуйте Bare-metal GPU по выгодной цене и платите только за фактическое использование.</p>
+                            <h3 data-i18n="infrastructureSavings">Infrastructure Savings</h3>
+                            <p data-i18n="infrastructureSavingsDesc">Rent Bare-metal GPU at a favorable price and pay only for actual usage.</p>
                         </div>
                     </div>
                 </div>
@@ -55,22 +64,37 @@
 
     <!-- More Possibilities Section -->
     <section class="more-possibilities">
+        <canvas id="moreParticlesCanvas"></canvas>
         <div class="container">
-            <h2 class="section-title">More possibilities</h2>
+            <h2 class="section-title" data-i18n="morePossibilities">More possibilities</h2>
             <div class="possibilities-grid">
                 <div class="possibility-card">
-                    <h3>AI Creators</h3>
-                    <p>Publish your AI agents on our platform and make them available to a wide audience of users without managing infrastructure or payments.</p>
-                    <p>You keep up to <strong>90% of the revenue</strong>, while we handle hosting, scaling, and distribution.</p>
+                    <div class="possibility-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="aiCreators">AI Creators</h3>
+                    <div class="possibility-card-content">
+                        <p data-i18n="aiCreatorsDesc1">Publish your AI agents on our platform and make them available to a wide audience of users without managing infrastructure or payments.</p>
+                        <p data-i18n="aiCreatorsDesc2">You keep up to <strong>90% of the revenue</strong>, while we handle hosting, scaling, and distribution.</p>
+                    </div>
                 </div>
                 <div class="possibility-card">
-                    <h3>GPU Providers</h3>
-                    <p>Connect your GPUs to our platform and monetize idle computing resources without having to find clients yourself.</p>
-                    <p>Machines can be launched quickly, and our decentralized architecture allows operation without strict time constraints. We take only a <strong>10% commission</strong>.</p>
+                    <div class="possibility-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                        </svg>
+                    </div>
+                    <h3 data-i18n="gpuProviders">GPU Providers</h3>
+                    <div class="possibility-card-content">
+                        <p data-i18n="gpuProvidersDesc1">Connect your GPUs to our platform and monetize idle computing resources without having to find clients yourself.</p>
+                        <p data-i18n="gpuProvidersDesc2">Machines can be launched quickly, and our decentralized architecture allows operation without strict time constraints. We take only a <strong>10% commission</strong>.</p>
+                    </div>
                 </div>
             </div>
             <div class="possibilities-cta">
-                <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+                <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
             </div>
         </div>
     </section>
@@ -78,123 +102,125 @@
     <!-- Models Table Section -->
     <section class="models-table">
         <div class="container">
-            <h2 class="section-title">Популярные модели</h2>
+            <h2 class="section-title" data-i18n="popularModels">Popular Models</h2>
             <div class="models-container">
                 <div class="model-row">
                     <div class="model-name">GPT-4 Turbo</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.01</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.03</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('GPT-4 Turbo')">Chat</button>
+                    <button class="chat-button" onclick="openChat('GPT-4 Turbo')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row">
                     <div class="model-name">GPT-3.5 Turbo</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.0005</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.0015</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('GPT-3.5 Turbo')">Chat</button>
+                    <button class="chat-button" onclick="openChat('GPT-3.5 Turbo')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row">
                     <div class="model-name">Claude 3 Opus</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.015</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.075</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('Claude 3 Opus')">Chat</button>
+                    <button class="chat-button" onclick="openChat('Claude 3 Opus')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row">
                     <div class="model-name">Claude 3 Sonnet</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.003</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.015</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('Claude 3 Sonnet')">Chat</button>
+                    <button class="chat-button" onclick="openChat('Claude 3 Sonnet')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row model-row-hidden">
                     <div class="model-name">Llama 3 70B</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.0007</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.0009</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('Llama 3 70B')">Chat</button>
+                    <button class="chat-button" onclick="openChat('Llama 3 70B')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row model-row-hidden">
                     <div class="model-name">Gemini Pro</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.0005</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.0015</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('Gemini Pro')">Chat</button>
+                    <button class="chat-button" onclick="openChat('Gemini Pro')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row model-row-hidden">
                     <div class="model-name">Mistral Large</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.002</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.006</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('Mistral Large')">Chat</button>
+                    <button class="chat-button" onclick="openChat('Mistral Large')" data-i18n="chat">chat</button>
                 </div>
                 <div class="model-row model-row-hidden">
                     <div class="model-name">Claude 3 Haiku</div>
                     <div class="model-pricing">
-                        <span class="price-label">Input:</span>
+                        <span class="price-label" data-i18n="input">Input:</span>
                         <span class="price-value">$0.00025</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
                     <div class="model-pricing">
-                        <span class="price-label">Output:</span>
+                        <span class="price-label" data-i18n="output">Output:</span>
                         <span class="price-value">$0.00125</span>
-                        <span class="price-unit">/1K tokens</span>
+                        <span class="price-unit" data-i18n="tokens">/1K tokens</span>
                     </div>
-                    <button class="chat-button" onclick="openChat('Claude 3 Haiku')">Chat</button>
+                    <button class="chat-button" onclick="openChat('Claude 3 Haiku')" data-i18n="chat">chat</button>
                 </div>
                 <div class="models-more-container">
                     <button class="more-button" onclick="toggleMoreModels()">
-                        <span class="more-button-icon"></span>
+                        <svg class="more-button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -203,11 +229,12 @@
 
     <!-- Pre-launch & Contacts Section -->
     <section class="prelaunch">
+        <canvas id="footerParticlesCanvas"></canvas>
         <div class="container">
             <div class="prelaunch-content">
-                <div class="prelaunch-text">
-                    <h2>Swarmind</h2>
-                    <p class="team-description">Decentralized AI-Platform. Distributed Inference, GPU-powered, Agents Store.</p>
+                <div class="prelaunch-left">
+                    <h2 data-i18n="swarmind">Swarmind</h2>
+                    <p class="team-description" data-i18n="footerDescription">Decentralized AI-Platform. Distributed Inference, GPU-powered, Agents Store.</p>
                     <div class="social-links">
                         <a href="#" class="social-link">
                             <svg class="social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -221,8 +248,35 @@
                         </a>
                     </div>
                 </div>
-                <div class="prelaunch-cta">
-                    <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+                <div class="prelaunch-center">
+                    <div class="footer-links">
+                        <a href="#" class="footer-link" data-i18n="dataPolicy">Data Policy</a>
+                        <span class="footer-separator">|</span>
+                        <a href="#" class="footer-link" data-i18n="userAgreement">User Agreement</a>
+                    </div>
+                </div>
+                <div class="prelaunch-right">
+                    <div class="prelaunch-cta">
+                        <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
+                    </div>
+                </div>
+                <div class="prelaunch-footer-bottom">
+                    <div class="footer-controls">
+                        <div class="language-toggle-container">
+                            <label class="language-toggle">
+                                <input type="checkbox" id="languageToggle" onchange="toggleLanguage()">
+                                <span class="language-toggle-slider"></span>
+                                <span class="language-toggle-label" data-i18n="languageLabel">EN</span>
+                            </label>
+                        </div>
+                        <div class="theme-toggle-container">
+                            <label class="theme-toggle">
+                                <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+                                <span class="theme-toggle-slider"></span>
+                                <span class="theme-toggle-label" data-i18n="lightMode">Light Mode</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -232,29 +286,29 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">×</span>
-            <h2>Оставить заявку</h2>
+            <h2 data-i18n="getAccess">get access</h2>
             <form id="applicationForm" onsubmit="handleSubmit(event)">
                 <div class="form-group">
-                    <label for="name">Имя</label>
+                    <label for="name" data-i18n="formName">Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="contact">Email / Telegram / Discord</label>
+                    <label for="contact" data-i18n="formContact">Email / Telegram / Discord</label>
                     <input type="text" id="contact" name="contact" required>
                 </div>
                 <div class="form-group">
-                    <label for="type">Тип запроса</label>
+                    <label for="type" data-i18n="formType">Request Type</label>
                     <select id="type" name="type" required>
-                        <option value="">Выберите тип</option>
-                        <option value="integrator">Интегратор / Разработчик проекта</option>
-                        <option value="developer">Разработчик AI-проектов / агентные решения</option>
+                        <option value="" data-i18n="formTypeSelect">Select type</option>
+                        <option value="integrator" data-i18n="formTypeIntegrator">Integrator / Project Developer</option>
+                        <option value="developer" data-i18n="formTypeDeveloper">AI Project Developer / Agent Solutions</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="description">Краткое описание нужд</label>
+                    <label for="description" data-i18n="formDescription">Brief description of needs</label>
                     <textarea id="description" name="description" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="submit-button">Отправить заявку</button>
+                <button type="submit" class="submit-button" data-i18n="getAccess">get access</button>
             </form>
         </div>
     </div>
