@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized AI-Platform - SwarMind</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Decentralized AI-Platform</h1>
+                <h2>Distributed Inference, GPU-powered, Agents Store</h2>
+                <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About SwarMind Section -->
+    <section class="about-swar">
+        <div class="container">
+            <div class="about-swar-content">
+                <div class="about-swar-left">
+                    <h2>About SwarMind</h2>
+                    <p>We are building a decentralized AI platform that simplifies deploying and scaling inference models and GPU infrastructure for businesses and developers.</p>
+                    <p>Our mission is to make powerful AI technologies accessible, transparent, and cost-efficient for building and monetizing AI solutions.</p>
+                    <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+                </div>
+                <div class="about-swar-right">
+                    <div class="swar-card">
+                        <div class="swar-card-icon">
+                            <div class="icon-play"></div>
+                        </div>
+                        <div class="swar-card-content">
+                            <h3>Quick Start</h3>
+                            <p>OpenAI-compatible API. десятки популярных моделей для всех типов задач, оперативная тех-поддержка.</p>
+                        </div>
+                    </div>
+                    <div class="swar-card">
+                        <div class="swar-card-icon">
+                            <div class="icon-chart"></div>
+                        </div>
+                        <div class="swar-card-content">
+                            <h3>Экономия на инфраструктуре</h3>
+                            <p>Арендуйте Bare-metal GPU по выгодной цене и платите только за фактическое использование.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More Possibilities Section -->
+    <section class="more-possibilities">
+        <div class="container">
+            <h2 class="section-title">More possibilities</h2>
+            <div class="possibilities-grid">
+                <div class="possibility-card">
+                    <h3>AI Creators</h3>
+                    <p>Publish your AI agents on our platform and make them available to a wide audience of users without managing infrastructure or payments.</p>
+                    <p>You keep up to <strong>90% of the revenue</strong>, while we handle hosting, scaling, and distribution.</p>
+                </div>
+                <div class="possibility-card">
+                    <h3>GPU Providers</h3>
+                    <p>Connect your GPUs to our platform and monetize idle computing resources without having to find clients yourself.</p>
+                    <p>Machines can be launched quickly, and our decentralized architecture allows operation without strict time constraints. We take only a <strong>10% commission</strong>.</p>
+                </div>
+            </div>
+            <div class="possibilities-cta">
+                <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Table Section -->
+    <section class="models-table">
+        <div class="container">
+            <h2 class="section-title">Популярные модели</h2>
+            <div class="models-container">
+                <div class="model-row">
+                    <div class="model-name">GPT-4 Turbo</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.01</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.03</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('GPT-4 Turbo')">Chat</button>
+                </div>
+                <div class="model-row">
+                    <div class="model-name">GPT-3.5 Turbo</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.0005</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.0015</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('GPT-3.5 Turbo')">Chat</button>
+                </div>
+                <div class="model-row">
+                    <div class="model-name">Claude 3 Opus</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.015</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.075</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('Claude 3 Opus')">Chat</button>
+                </div>
+                <div class="model-row">
+                    <div class="model-name">Claude 3 Sonnet</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.003</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.015</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('Claude 3 Sonnet')">Chat</button>
+                </div>
+                <div class="model-row model-row-hidden">
+                    <div class="model-name">Llama 3 70B</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.0007</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.0009</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('Llama 3 70B')">Chat</button>
+                </div>
+                <div class="model-row model-row-hidden">
+                    <div class="model-name">Gemini Pro</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.0005</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.0015</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('Gemini Pro')">Chat</button>
+                </div>
+                <div class="model-row model-row-hidden">
+                    <div class="model-name">Mistral Large</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.002</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.006</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('Mistral Large')">Chat</button>
+                </div>
+                <div class="model-row model-row-hidden">
+                    <div class="model-name">Claude 3 Haiku</div>
+                    <div class="model-pricing">
+                        <span class="price-label">Input:</span>
+                        <span class="price-value">$0.00025</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <div class="model-pricing">
+                        <span class="price-label">Output:</span>
+                        <span class="price-value">$0.00125</span>
+                        <span class="price-unit">/1K tokens</span>
+                    </div>
+                    <button class="chat-button" onclick="openChat('Claude 3 Haiku')">Chat</button>
+                </div>
+                <div class="models-more-container">
+                    <button class="more-button" onclick="toggleMoreModels()">
+                        <span class="more-button-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-launch & Contacts Section -->
+    <section class="prelaunch">
+        <div class="container">
+            <div class="prelaunch-content">
+                <div class="prelaunch-text">
+                    <h2>Swarmind</h2>
+                    <p class="team-description">Decentralized AI-Platform. Distributed Inference, GPU-powered, Agents Store.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg class="social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221c-.15 1.58-.84 5.61-1.188 7.43-.174.93-.516 1.24-1.048 1.24-.896.01-1.57-.59-2.434-1.08-1.35-.69-2.11-1.12-3.42-1.79-1.52-.85-.535-1.32.33-2.08.227-.2 4.006-3.68 4.084-3.99.01-.03.01-.15-.056-.22-.066-.07-.18-.09-.264-.05-.09.04-1.52.95-4.29 2.79-.406.27-.774.4-1.104.4-.364-.01-1.064-.2-1.584-.37-.64-.2-1.15-.31-1.11-.66.023-.18.32-.36.89-.55 3.47-1.52 5.78-2.52 6.93-3.01 3.33-1.4 4.02-1.64 4.47-1.66.1 0 .32.02.46.15.12.1.16.24.18.34-.01.06.01.24 0 .37z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg class="social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="prelaunch-cta">
+                    <button class="cta-button" onclick="openModal()">Оставить заявку</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <h2>Оставить заявку</h2>
+            <form id="applicationForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Email / Telegram / Discord</label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="type">Тип запроса</label>
+                    <select id="type" name="type" required>
+                        <option value="">Выберите тип</option>
+                        <option value="integrator">Интегратор / Разработчик проекта</option>
+                        <option value="developer">Разработчик AI-проектов / агентные решения</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Краткое описание нужд</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
