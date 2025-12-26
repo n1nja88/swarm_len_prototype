@@ -316,7 +316,7 @@ const translations = {
     en: {
         heroTitle: 'Decentralized AI-Platform',
         heroSubtitle: 'Distributed Inference, GPU-powered, Agents Store',
-        getAccess: 'get access',
+        getAccess: 'Get Access',
         login: 'login',
         aboutSwarMind: 'About Swarmind',
         aboutSwarMindDesc1: 'We are building a decentralized AI platform that simplifies deploying and scaling inference models and GPU infrastructure for businesses and developers.',
@@ -343,13 +343,15 @@ const translations = {
         userAgreement: 'User Agreement',
         lightMode: 'Light Mode',
         languageLabel: 'EN',
-        formName: 'Name',
-        formContact: 'Email / Telegram / Discord',
+        formName: 'Your Name',
+        formContact: 'Email | Telegram',
         formType: 'Request Type',
-        formTypeSelect: 'Select type',
-        formTypeIntegrator: 'Integrator / Project Developer',
-        formTypeDeveloper: 'AI Project Developer / Agent Solutions',
-        formDescription: 'Brief description of needs'
+        formTypeSelect: 'Request Type',
+        formTypeRentGpu: 'Rent GPU',
+        formTypeRentOutGpu: 'Rent Out GPU',
+        formTypeAgentPlacement: 'Agent Placement',
+        formTypeLlmBusiness: 'LLM for business',
+        formTypeLlmPersonal: 'LLM for personal use'
     },
     ru: {
         heroTitle: 'Децентрализованная AI-Платформа',
@@ -381,13 +383,15 @@ const translations = {
         userAgreement: 'Пользовательское соглашение',
         lightMode: 'Светлая тема',
         languageLabel: 'RU',
-        formName: 'Имя',
-        formContact: 'Email / Telegram / Discord',
+        formName: 'Ваше имя',
+        formContact: 'Email | Telegram',
         formType: 'Тип запроса',
-        formTypeSelect: 'Выберите тип',
-        formTypeIntegrator: 'Интегратор / Разработчик проекта',
-        formTypeDeveloper: 'Разработчик AI-проектов / агентные решения',
-        formDescription: 'Краткое описание нужд'
+        formTypeSelect: 'Тип запроса',
+        formTypeRentGpu: 'Аренда GPU',
+        formTypeRentOutGpu: 'Сдача GPU в аренду',
+        formTypeAgentPlacement: 'Размещение агента',
+        formTypeLlmBusiness: 'LLM для бизнеса',
+        formTypeLlmPersonal: 'LLM для личного использования'
     }
 };
 
@@ -423,6 +427,15 @@ function setLanguage(lang) {
             }
         });
     }
+    
+    // Update placeholders
+    const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+    placeholderElements.forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            element.placeholder = translations[lang][key];
+        }
+    });
     
     localStorage.setItem('language', lang);
 }

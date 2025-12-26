@@ -17,7 +17,7 @@
                 <h1 data-i18n="heroTitle">Decentralized AI-Platform</h1>
                 <h2 data-i18n="heroSubtitle">Distributed Inference, GPU-powered, Agents Store</h2>
                 <div class="hero-buttons">
-                    <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
+                    <button class="cta-button" onclick="openModal()" data-i18n="getAccess">Get Access</button>
                     <button class="login-button" onclick="openLogin()" data-i18n="login">login</button>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <h2 data-i18n="aboutSwarMind">About Swarmind</h2>
                     <p data-i18n="aboutSwarMindDesc1">We are building a decentralized AI platform that simplifies deploying and scaling inference models and GPU infrastructure for businesses and developers.</p>
                     <p data-i18n="aboutSwarMindDesc2">Our mission is to make powerful AI technologies accessible, transparent, and cost-efficient for building and monetizing AI solutions.</p>
-                    <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
+                    <button class="cta-button" onclick="openModal()" data-i18n="getAccess">Get Access</button>
                 </div>
                 <div class="about-swar-right">
                     <div class="swar-card">
@@ -257,7 +257,7 @@
                 </div>
                 <div class="prelaunch-right">
                     <div class="prelaunch-cta">
-                        <button class="cta-button" onclick="openModal()" data-i18n="getAccess">get access</button>
+                        <button class="cta-button" onclick="openModal()" data-i18n="getAccess">Get Access</button>
                     </div>
                 </div>
                 <div class="prelaunch-footer-bottom">
@@ -286,29 +286,25 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">×</span>
-            <h2 data-i18n="getAccess">get access</h2>
+            <h2 data-i18n="getAccess">Get Access</h2>
             <form id="applicationForm" onsubmit="handleSubmit(event)">
                 <div class="form-group">
-                    <label for="name" data-i18n="formName">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" placeholder="Your Name" data-i18n-placeholder="formName" required>
                 </div>
                 <div class="form-group">
-                    <label for="contact" data-i18n="formContact">Email / Telegram / Discord</label>
-                    <input type="text" id="contact" name="contact" required>
+                    <input type="text" id="contact" name="contact" placeholder="Email | Telegram" data-i18n-placeholder="formContact" required>
                 </div>
                 <div class="form-group">
-                    <label for="type" data-i18n="formType">Request Type</label>
                     <select id="type" name="type" required>
-                        <option value="" data-i18n="formTypeSelect">Select type</option>
-                        <option value="integrator" data-i18n="formTypeIntegrator">Integrator / Project Developer</option>
-                        <option value="developer" data-i18n="formTypeDeveloper">AI Project Developer / Agent Solutions</option>
+                        <option value="" data-i18n="formTypeSelect" disabled selected>Request Type</option>
+                        <option value="rent-gpu" data-i18n="formTypeRentGpu">Rent GPU</option>
+                        <option value="rent-out-gpu" data-i18n="formTypeRentOutGpu">Rent Out GPU</option>
+                        <option value="agent-placement" data-i18n="formTypeAgentPlacement">Agent Placement</option>
+                        <option value="llm-business" data-i18n="formTypeLlmBusiness">LLM for business</option>
+                        <option value="llm-personal" data-i18n="formTypeLlmPersonal">LLM for personal use</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="description" data-i18n="formDescription">Brief description of needs</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="submit-button" data-i18n="getAccess">get access</button>
+                <button type="submit" class="submit-button" data-i18n="getAccess">Get Access</button>
             </form>
         </div>
     </div>

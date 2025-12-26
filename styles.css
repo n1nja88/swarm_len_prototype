@@ -969,13 +969,14 @@ body.light-theme .modal {
     background-color: var(--modal-bg);
     padding: 40px;
     border-radius: 16px;
-    max-width: 500px;
+    max-width: 375px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
     animation: slideUp 0.3s ease;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    text-align: center;
 }
 
 @keyframes slideUp {
@@ -1009,6 +1010,7 @@ body.light-theme .modal {
     font-size: 2rem;
     margin-bottom: 2rem;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .form-group {
@@ -1016,10 +1018,7 @@ body.light-theme .modal {
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    display: none;
 }
 
 .form-group input,
@@ -1028,12 +1027,33 @@ body.light-theme .modal {
     width: 100%;
     padding: 12px;
     background-color: var(--input-bg);
-    border: 1px solid var(--input-border);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     color: var(--text-primary);
     font-size: 1rem;
     font-family: inherit;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.form-group input:focus::placeholder {
+    opacity: 0;
+}
+
+.form-group select:invalid {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.form-group select:valid,
+.form-group select:focus {
+    color: var(--text-primary);
+    opacity: 1;
 }
 
 .form-group input:focus,
@@ -1042,6 +1062,42 @@ body.light-theme .modal {
     outline: none;
     border-color: var(--accent-color);
     box-shadow: 0 0 0 3px rgba(93, 99, 255, 0.08);
+    background-color: var(--card-bg);
+}
+
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235d63ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+.form-group select:hover {
+    border-color: var(--border-hover);
+    background-color: var(--card-hover);
+}
+
+.form-group select:focus {
+    border-color: var(--accent-color);
+    background-color: var(--card-bg);
+}
+
+.form-group select option {
+    background-color: var(--modal-bg);
+    color: var(--text-primary);
+    padding: 12px;
+}
+
+.form-group select option:hover,
+.form-group select option:checked {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+.form-group select option:focus {
+    background-color: var(--accent-hover);
+    color: #ffffff;
 }
 
 .form-group textarea {
