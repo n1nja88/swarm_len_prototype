@@ -1,8 +1,22 @@
-// Modal functions
+// ============================================
+// МОДАЛЬНОЕ ОКНО
+// ============================================
+
+// Открытие модального окна с формой заявки
 function openModal() {
     const modal = document.getElementById('modal');
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
+    // Hide all request fields when opening modal
+    const allFields = document.querySelectorAll('.request-fields');
+    allFields.forEach(field => {
+        field.style.display = 'none';
+    });
+    // Close dropdown if open
+    const customSelect = document.querySelector('.custom-select');
+    if (customSelect) {
+        customSelect.classList.remove('active');
+    }
 }
 
 function closeModal() {
@@ -19,21 +33,126 @@ window.onclick = function(event) {
     }
 }
 
-// Handle form submission
+// ============================================
+// КАСТОМНЫЙ DROPDOWN (выпадающее меню)
+// ============================================
+
+// Переключение видимости выпадающего меню
+function toggleCustomSelect() {
+    const customSelect = document.querySelector('.custom-select');
+    customSelect.classList.toggle('active');
+}
+
+function selectOption(element, value) {
+    const hiddenInput = document.getElementById('type');
+    const selectedDisplay = document.getElementById('select-selected');
+    const allOptions = document.querySelectorAll('.select-option');
+    
+    // Update hidden input
+    hiddenInput.value = value;
+    
+    // Update display text
+    const textSpan = document.getElementById('select-selected-text');
+    if (textSpan) {
+        textSpan.textContent = element.textContent;
+        textSpan.removeAttribute('data-i18n'); // Remove i18n attribute when value is selected
+    }
+    
+    // Add has-value class to show selected state
+    if (selectedDisplay) {
+        selectedDisplay.classList.add('has-value');
+    }
+    
+    // Update selected state
+    allOptions.forEach(opt => opt.classList.remove('selected'));
+    element.classList.add('selected');
+    
+    // Close dropdown
+    const customSelect = document.querySelector('.custom-select');
+    customSelect.classList.remove('active');
+    
+    // Trigger field toggle
+    toggleRequestFields();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const customSelect = document.querySelector('.custom-select');
+    if (customSelect && !customSelect.contains(event.target)) {
+        customSelect.classList.remove('active');
+    }
+});
+
+// Показ/скрытие полей формы в зависимости от выбранного типа запроса
+function toggleRequestFields() {
+    const typeInput = document.getElementById('type');
+    const selectedType = typeInput.value;
+    
+    // Hide all field groups
+    const allFields = document.querySelectorAll('.request-fields');
+    allFields.forEach(field => {
+        field.style.display = 'none';
+    });
+    
+    // Show fields for selected type
+    if (selectedType === 'rent-gpu') {
+        document.getElementById('rent-gpu-fields').style.display = 'block';
+    } else if (selectedType === 'rent-out-gpu') {
+        document.getElementById('rent-out-gpu-fields').style.display = 'block';
+    } else if (selectedType === 'llm-business') {
+        document.getElementById('llm-business-fields').style.display = 'block';
+    } else if (selectedType === 'agent-placement') {
+        document.getElementById('agent-placement-fields').style.display = 'block';
+    } else if (selectedType === 'llm-personal') {
+        document.getElementById('llm-personal-fields').style.display = 'block';
+    }
+}
+
+// Обработка отправки формы заявки
 function handleSubmit(event) {
     event.preventDefault();
+    
+    const typeInput = document.getElementById('type');
+    if (!typeInput.value) {
+        alert(currentLang === 'ru' ? 'Пожалуйста, выберите тип запроса' : 'Please select a request type');
+        return;
+    }
     
     const formData = {
         name: document.getElementById('name').value,
         contact: document.getElementById('contact').value,
-        type: document.getElementById('type').value,
-        description: document.getElementById('description').value
+        type: typeInput.value
     };
     
-    // Here you would typically send the data to a server
+    // Add fields based on type
+    const selectedType = formData.type;
+    if (selectedType === 'rent-gpu') {
+        formData.targetGpuModel = document.getElementById('target-gpu-model').value;
+        formData.gpuCount = document.getElementById('gpu-count').value;
+        formData.minVram = document.getElementById('min-vram').value;
+        formData.expectedUptime = document.getElementById('expected-uptime').value;
+    } else if (selectedType === 'rent-out-gpu') {
+        formData.gpuModel = document.getElementById('gpu-model-out').value;
+        formData.gpuCount = document.getElementById('gpu-count-out').value;
+        formData.totalVram = document.getElementById('total-vram').value;
+        formData.availableUptime = document.getElementById('available-uptime').value;
+    } else if (selectedType === 'llm-business') {
+        formData.modelType = document.getElementById('model-type-business').value;
+        formData.modelName = document.getElementById('model-name-business').value;
+        formData.modelUrl = document.getElementById('model-url').value;
+        formData.avgInputTokens = document.getElementById('avg-input-tokens').value;
+        formData.avgOutputTokens = document.getElementById('avg-output-tokens').value;
+    } else if (selectedType === 'agent-placement') {
+        formData.agentDescription = document.getElementById('agent-description').value;
+    } else if (selectedType === 'llm-personal') {
+        formData.modelType = document.getElementById('model-type-personal').value;
+        formData.modelName = document.getElementById('model-name-personal').value;
+    }
+    
+    // TODO: Отправить данные на сервер
     console.log('Form submitted:', formData);
     
-    // Show success message (you can customize this)
+    // Показ сообщения об успешной отправке
     const currentLang = localStorage.getItem('language') || 'en';
     const message = currentLang === 'ru' 
         ? 'Заявка отправлена! Мы свяжемся с вами в ближайшее время.'
@@ -42,6 +161,23 @@ function handleSubmit(event) {
     
     // Reset form and close modal
     document.getElementById('applicationForm').reset();
+    
+    // Reset custom select
+    const hiddenInput = document.getElementById('type');
+    const selectedDisplay = document.getElementById('select-selected');
+    const textSpan = document.getElementById('select-selected-text');
+    if (hiddenInput) hiddenInput.value = '';
+    if (selectedDisplay) selectedDisplay.classList.remove('has-value');
+    if (textSpan) {
+        const currentLang = localStorage.getItem('language') || 'en';
+        const key = 'formTypeSelect';
+        if (translations[currentLang] && translations[currentLang][key]) {
+            textSpan.textContent = translations[currentLang][key];
+            textSpan.setAttribute('data-i18n', key);
+        }
+    }
+    
+    toggleRequestFields(); // Reset fields visibility
     closeModal();
 }
 
@@ -71,9 +207,8 @@ window.addEventListener('load', function() {
     });
 });
 
-// Open chat function
+// Открытие чата с выбранной моделью (заглушка - нужно реализовать)
 function openChat(modelName) {
-    // Here you would typically redirect to chat or open chat interface
     console.log('Opening chat for:', modelName);
     const currentLang = localStorage.getItem('language') || 'en';
     const message = currentLang === 'ru' 
@@ -83,9 +218,8 @@ function openChat(modelName) {
     // You can replace this with actual chat functionality
 }
 
-// Open login function
+// Открытие страницы входа (заглушка - нужно реализовать)
 function openLogin() {
-    // Here you would typically redirect to login page or open login modal
     console.log('Opening login');
     const currentLang = localStorage.getItem('language') || 'en';
     const message = currentLang === 'ru' 
@@ -154,7 +288,11 @@ function toggleTheme() {
     }
 }
 
-// Particles animation for swarm structure
+// ============================================
+// АНИМАЦИЯ ЧАСТИЦ (фоновая анимация)
+// ============================================
+
+// Класс для создания анимации частиц на canvas
 class ParticleSwarm {
     constructor(canvas, particleCount = 50) {
         this.canvas = canvas;
@@ -311,7 +449,11 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Language translations
+// ============================================
+// ЛОКАЛИЗАЦИЯ (переводы)
+// ============================================
+
+// Словарь переводов для английского и русского языков
 const translations = {
     en: {
         heroTitle: 'Decentralized AI-Platform',
@@ -351,7 +493,21 @@ const translations = {
         formTypeRentOutGpu: 'Rent Out GPU',
         formTypeAgentPlacement: 'Agent Placement',
         formTypeLlmBusiness: 'LLM for business',
-        formTypeLlmPersonal: 'LLM for personal use'
+        formTypeLlmPersonal: 'LLM for personal use',
+        formTargetGpuModel: 'Target GPU Model',
+        formGpuCount: 'How Many GPUs Do You Need?',
+        formMinVram: 'Minimum VRAM (GB)',
+        formExpectedUptime: 'Expected Uptime',
+        formGpuModel: 'GPU Model',
+        formGpuCountOut: 'How Many GPU',
+        formTotalVram: 'Total VRAM',
+        formAvailableUptime: 'Available Uptime',
+        formModelType: 'Model Type',
+        formModelName: 'Model Name',
+        formModelUrl: 'Model URL',
+        formAvgInputTokens: 'Avg Input Token Quantity (daily)',
+        formAvgOutputTokens: 'Avg Output Token Quantity (daily)',
+        formAgentDescription: 'Please describe the agent you want to place'
     },
     ru: {
         heroTitle: 'Децентрализованная AI-Платформа',
@@ -391,11 +547,25 @@ const translations = {
         formTypeRentOutGpu: 'Сдача GPU в аренду',
         formTypeAgentPlacement: 'Размещение агента',
         formTypeLlmBusiness: 'LLM для бизнеса',
-        formTypeLlmPersonal: 'LLM для личного использования'
+        formTypeLlmPersonal: 'LLM для личного использования',
+        formTargetGpuModel: 'Модель GPU',
+        formGpuCount: 'Сколько GPU вам нужно?',
+        formMinVram: 'Минимальный VRAM (GB)',
+        formExpectedUptime: 'Ожидаемое время работы',
+        formGpuModel: 'Модель GPU',
+        formGpuCountOut: 'Количество GPU',
+        formTotalVram: 'Общий VRAM',
+        formAvailableUptime: 'Доступное время работы',
+        formModelType: 'Тип модели',
+        formModelName: 'Название модели',
+        formModelUrl: 'URL модели',
+        formAvgInputTokens: 'Среднее количество входных токенов (в день)',
+        formAvgOutputTokens: 'Среднее количество выходных токенов (в день)',
+        formAgentDescription: 'Опишите агента, которого вы хотите разместить'
     }
 };
 
-// Set language function
+// Установка языка интерфейса
 function setLanguage(lang) {
     document.documentElement.lang = lang;
     const elements = document.querySelectorAll('[data-i18n]');
@@ -416,16 +586,23 @@ function setLanguage(lang) {
         }
     });
     
-    // Update select options
-    const selectType = document.getElementById('type');
-    if (selectType) {
-        const options = selectType.querySelectorAll('option[data-i18n]');
-        options.forEach(option => {
-            const key = option.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                option.textContent = translations[lang][key];
-            }
-        });
+    // Update custom select options
+    const selectOptions = document.querySelectorAll('.select-option[data-i18n]');
+    selectOptions.forEach(option => {
+        const key = option.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            option.textContent = translations[lang][key];
+        }
+    });
+    
+    // Update select-selected placeholder
+    const textSpan = document.getElementById('select-selected-text');
+    const hiddenInput = document.getElementById('type');
+    if (textSpan && (!hiddenInput || !hiddenInput.value)) {
+        const key = textSpan.getAttribute('data-i18n') || 'formTypeSelect';
+        if (translations[lang] && translations[lang][key]) {
+            textSpan.textContent = translations[lang][key];
+        }
     }
     
     // Update placeholders

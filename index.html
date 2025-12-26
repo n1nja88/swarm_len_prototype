@@ -282,7 +282,7 @@
         </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Модальное окно с формой заявки -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">×</span>
@@ -295,15 +295,94 @@
                     <input type="text" id="contact" name="contact" placeholder="Email | Telegram" data-i18n-placeholder="formContact" required>
                 </div>
                 <div class="form-group">
-                    <select id="type" name="type" required>
-                        <option value="" data-i18n="formTypeSelect" disabled selected>Request Type</option>
-                        <option value="rent-gpu" data-i18n="formTypeRentGpu">Rent GPU</option>
-                        <option value="rent-out-gpu" data-i18n="formTypeRentOutGpu">Rent Out GPU</option>
-                        <option value="agent-placement" data-i18n="formTypeAgentPlacement">Agent Placement</option>
-                        <option value="llm-business" data-i18n="formTypeLlmBusiness">LLM for business</option>
-                        <option value="llm-personal" data-i18n="formTypeLlmPersonal">LLM for personal use</option>
-                    </select>
+                    <!-- Кастомный dropdown для выбора типа запроса -->
+                    <div class="custom-select">
+                        <input type="hidden" id="type" name="type" required>
+                        <div class="select-selected" id="select-selected" onclick="toggleCustomSelect()">
+                            <span id="select-selected-text" data-i18n="formTypeSelect">Request Type</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="select-arrow">
+                                <path fill="currentColor" d="M6 9L1 4h10z"/>
+                            </svg>
+                        </div>
+                        <div class="select-items" id="select-items">
+                            <div class="select-option" data-value="rent-gpu" data-i18n="formTypeRentGpu" onclick="selectOption(this, 'rent-gpu')">Rent GPU</div>
+                            <div class="select-option" data-value="rent-out-gpu" data-i18n="formTypeRentOutGpu" onclick="selectOption(this, 'rent-out-gpu')">Rent Out GPU</div>
+                            <div class="select-option" data-value="agent-placement" data-i18n="formTypeAgentPlacement" onclick="selectOption(this, 'agent-placement')">Agent Placement</div>
+                            <div class="select-option" data-value="llm-business" data-i18n="formTypeLlmBusiness" onclick="selectOption(this, 'llm-business')">LLM for business</div>
+                            <div class="select-option" data-value="llm-personal" data-i18n="formTypeLlmPersonal" onclick="selectOption(this, 'llm-personal')">LLM for personal use</div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- Динамические поля формы (показываются в зависимости от выбранного типа запроса) -->
+                <!-- Rent GPU fields -->
+                <div id="rent-gpu-fields" class="request-fields" style="display: none;">
+                    <div class="form-group">
+                        <input type="text" id="target-gpu-model" name="target-gpu-model" placeholder="Target GPU Model" data-i18n-placeholder="formTargetGpuModel">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="gpu-count" name="gpu-count" placeholder="How Many GPUs Do You Need?" data-i18n-placeholder="formGpuCount">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="min-vram" name="min-vram" placeholder="Minimum VRAM (GB)" data-i18n-placeholder="formMinVram">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="expected-uptime" name="expected-uptime" placeholder="Expected Uptime" data-i18n-placeholder="formExpectedUptime">
+                    </div>
+                </div>
+                
+                <!-- Rent Out GPU fields -->
+                <div id="rent-out-gpu-fields" class="request-fields" style="display: none;">
+                    <div class="form-group">
+                        <input type="text" id="gpu-model-out" name="gpu-model-out" placeholder="GPU Model" data-i18n-placeholder="formGpuModel">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="gpu-count-out" name="gpu-count-out" placeholder="How Many GPU" data-i18n-placeholder="formGpuCountOut">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="total-vram" name="total-vram" placeholder="Total VRAM" data-i18n-placeholder="formTotalVram">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="available-uptime" name="available-uptime" placeholder="Available Uptime" data-i18n-placeholder="formAvailableUptime">
+                    </div>
+                </div>
+                
+                <!-- LLM for business fields -->
+                <div id="llm-business-fields" class="request-fields" style="display: none;">
+                    <div class="form-group">
+                        <input type="text" id="model-type-business" name="model-type-business" placeholder="Model Type" data-i18n-placeholder="formModelType">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="model-name-business" name="model-name-business" placeholder="Model Name" data-i18n-placeholder="formModelName">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="model-url" name="model-url" placeholder="Model URL" data-i18n-placeholder="formModelUrl">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="avg-input-tokens" name="avg-input-tokens" placeholder="Avg Input Token Quantity (daily)" data-i18n-placeholder="formAvgInputTokens">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="avg-output-tokens" name="avg-output-tokens" placeholder="Avg Output Token Quantity (daily)" data-i18n-placeholder="formAvgOutputTokens">
+                    </div>
+                </div>
+                
+                <!-- Agent Placement fields -->
+                <div id="agent-placement-fields" class="request-fields" style="display: none;">
+                    <div class="form-group">
+                        <textarea id="agent-description" name="agent-description" placeholder="Please describe the agent you want to place" data-i18n-placeholder="formAgentDescription" rows="4"></textarea>
+                    </div>
+                </div>
+                
+                <!-- LLM for personal use fields -->
+                <div id="llm-personal-fields" class="request-fields" style="display: none;">
+                    <div class="form-group">
+                        <input type="text" id="model-type-personal" name="model-type-personal" placeholder="Model Type" data-i18n-placeholder="formModelType">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="model-name-personal" name="model-name-personal" placeholder="Model Name" data-i18n-placeholder="formModelName">
+                    </div>
+                </div>
+                
                 <button type="submit" class="submit-button" data-i18n="getAccess">Get Access</button>
             </form>
         </div>
