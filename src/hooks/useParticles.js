@@ -109,3 +109,6 @@ export function useParticles(particleCount = 50, isLightTheme = false) {
     return canvasRef;
 }
 
+
+
+

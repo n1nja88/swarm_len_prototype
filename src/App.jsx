@@ -6,11 +6,13 @@ import { MorePossibilities } from './components/MorePossibilities';
 import { ModelsTable } from './components/ModelsTable';
 import { Footer } from './components/Footer';
 import { Modal } from './components/Modal';
+import { LoginModal } from './components/LoginModal';
 import './styles.css';
 
 // Главный компонент приложения
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const { isLightTheme } = useTheme();
 
     const handleGetAccess = () => {
@@ -18,11 +20,7 @@ function App() {
     };
 
     const handleLogin = () => {
-        const currentLang = localStorage.getItem('language') || 'en';
-        const message = currentLang === 'ru'
-            ? 'Переход на страницу входа'
-            : 'Redirecting to login page';
-        alert(message);
+        setIsLoginModalOpen(true);
     };
 
     return (
@@ -33,6 +31,7 @@ function App() {
             <ModelsTable />
             <Footer onGetAccess={handleGetAccess} />
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
         </div>
     );
 }
