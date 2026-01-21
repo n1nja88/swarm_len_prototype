@@ -1756,3 +1756,542 @@ body.light-theme .select-items {
     }
 }
 
+/* GPU Rental Tasks Section */
+.gpu-rental-tasks {
+    background: var(--bg-primary);
+    padding: 120px 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.gpu-rental-tasks-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.gpu-rental-tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    align-items: stretch;
+}
+
+.gpu-rental-task-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px 35px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.gpu-rental-task-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(93, 99, 255, 0.1);
+}
+
+.gpu-rental-task-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.gpu-rental-task-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0;
+    flex-grow: 1;
+}
+
+@media (max-width: 968px) {
+    .gpu-rental-tasks-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* GPU Rental Why Section */
+.gpu-rental-why {
+    background: var(--bg-primary);
+    padding: 120px 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.gpu-rental-why-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gpu-rental-why-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gpu-rental-why-items {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.gpu-rental-why-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gpu-rental-why-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gpu-rental-why-item-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+.gpu-rental-why-item.visible .gpu-rental-why-item-title {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.gpu-rental-why-item-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.gpu-rental-why-item.visible .gpu-rental-why-item-desc {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 968px) {
+    .gpu-rental-why-item {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* GPU Rental How To Section */
+.gpu-rental-how-to {
+    background: var(--bg-primary);
+    padding: 120px 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.gpu-rental-how-to-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.gpu-rental-how-to-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 4rem;
+    align-items: stretch;
+}
+
+.gpu-rental-how-to-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.gpu-rental-how-to-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(93, 99, 255, 0.1);
+}
+
+.gpu-rental-how-to-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(93, 99, 255, 0.15) 0%, rgba(93, 99, 255, 0.15) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.gpu-rental-how-to-icon span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.gpu-rental-how-to-card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+}
+
+.gpu-rental-how-to-card-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+    flex-grow: 1;
+    padding-top: 0;
+}
+
+.gpu-rental-how-to-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gpu-rental-how-to-cta .cta-button {
+    background: linear-gradient(135deg, #5d63ff 0%, #5d63ff 100%);
+    box-shadow: 0 4px 20px rgba(93, 99, 255, 0.25), 0 0 40px rgba(93, 99, 255, 0.1);
+}
+
+.gpu-rental-how-to-cta .cta-button:hover {
+    background: linear-gradient(135deg, #6f75ff 0%, #6f75ff 100%);
+    box-shadow: 0 6px 30px rgba(93, 99, 255, 0.3), 0 0 60px rgba(93, 99, 255, 0.15);
+}
+
+@media (max-width: 968px) {
+    .gpu-rental-how-to-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .gpu-rental-how-to-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Free Infrastructure Focus Section */
+.free-infrastructure-focus {
+    background: var(--bg-primary);
+    padding: 120px 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.free-infrastructure-focus-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.free-infrastructure-focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    align-items: stretch;
+}
+
+.free-infrastructure-focus-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 45px 35px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.free-infrastructure-focus-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(93, 99, 255, 0.1);
+}
+
+.free-infrastructure-focus-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(93, 99, 255, 0.15) 0%, rgba(93, 99, 255, 0.15) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+}
+
+.free-infrastructure-focus-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-primary);
+    stroke: currentColor;
+}
+
+.free-infrastructure-focus-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.free-infrastructure-focus-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+    flex-grow: 1;
+}
+
+@media (max-width: 968px) {
+    .free-infrastructure-focus-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+/* Free Infrastructure Projects Section */
+.free-infrastructure-projects {
+    background: var(--bg-primary);
+    padding: 120px 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.free-infrastructure-projects-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.free-infrastructure-projects-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.free-infrastructure-projects-items {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.free-infrastructure-projects-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.free-infrastructure-projects-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.free-infrastructure-projects-item-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+.free-infrastructure-projects-item.visible .free-infrastructure-projects-item-title {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.free-infrastructure-projects-item-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.free-infrastructure-projects-item.visible .free-infrastructure-projects-item-desc {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 968px) {
+    .free-infrastructure-projects-item {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Free Infrastructure How To Section */
+.free-infrastructure-how-to {
+    background: var(--bg-primary);
+    padding: 120px 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.free-infrastructure-how-to-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.free-infrastructure-how-to-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 4rem;
+    align-items: stretch;
+}
+
+.free-infrastructure-how-to-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.free-infrastructure-how-to-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(93, 99, 255, 0.1);
+}
+
+.free-infrastructure-how-to-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(93, 99, 255, 0.15) 0%, rgba(93, 99, 255, 0.15) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.free-infrastructure-how-to-icon span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.free-infrastructure-how-to-card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+}
+
+.free-infrastructure-how-to-card-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+    flex-grow: 1;
+    padding-top: 0;
+}
+
+.free-infrastructure-how-to-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.free-infrastructure-how-to-cta .cta-button {
+    background: linear-gradient(135deg, #5d63ff 0%, #5d63ff 100%);
+    box-shadow: 0 4px 20px rgba(93, 99, 255, 0.25), 0 0 40px rgba(93, 99, 255, 0.1);
+}
+
+.free-infrastructure-how-to-cta .cta-button:hover {
+    background: linear-gradient(135deg, #6f75ff 0%, #6f75ff 100%);
+    box-shadow: 0 6px 30px rgba(93, 99, 255, 0.3), 0 0 60px rgba(93, 99, 255, 0.15);
+}
+
+@media (max-width: 1200px) {
+    .free-infrastructure-how-to-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .free-infrastructure-how-to-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
