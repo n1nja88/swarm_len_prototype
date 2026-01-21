@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../hooks/useTheme';
-import { ParticleCanvas } from './ParticleCanvas';
 
 // Компонент футера
 export function Footer({ onGetAccess }) {
@@ -10,7 +9,6 @@ export function Footer({ onGetAccess }) {
 
     return (
         <section className="prelaunch">
-            <ParticleCanvas particleCount={50} isLightTheme={isLightTheme} />
             <div className="container">
                 <div className="prelaunch-content">
                     <div className="prelaunch-left">

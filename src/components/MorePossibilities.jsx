@@ -1,16 +1,12 @@
 import { useLanguage } from '../contexts/LanguageContext';
-import { useTheme } from '../hooks/useTheme';
-import { ParticleCanvas } from './ParticleCanvas';
 import { Link } from 'react-router-dom';
 
 // Компонент секции "Больше возможностей"
 export function MorePossibilities({ onGetAccess }) {
     const { t } = useLanguage();
-    const { isLightTheme } = useTheme();
 
     return (
         <section className="more-possibilities">
-            <ParticleCanvas particleCount={40} isLightTheme={isLightTheme} />
             <div className="container">
                 <h2 className="section-title">{t('morePossibilities')}</h2>
                 <div className="possibilities-grid">

@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useTheme } from '../hooks/useTheme';
-import { ParticleCanvas } from '../components/ParticleCanvas';
 
 export function UnifiedAPI({ onGetAccess }) {
     const { t } = useLanguage();
-    const { isLightTheme } = useTheme();
     const [scrollPosition, setScrollPosition] = useState(0);
     
     useEffect(() => {
@@ -61,7 +58,6 @@ export function UnifiedAPI({ onGetAccess }) {
         <div className="page">
             <section className="hero">
                 <div className="hero-background">
-                    <ParticleCanvas particleCount={80} isLightTheme={isLightTheme} />
                 </div>
                 <div className="container">
                     <div className="hero-content">

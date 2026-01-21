@@ -147,6 +147,77 @@ body {
     height: 100%;
     background: var(--bg-primary);
     z-index: -1;
+    overflow: hidden;
+}
+
+.concentric-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.concentric-circles .circle {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+    transform: translate(-50%, -50%) scaleX(var(--stretch-x)) scaleY(var(--stretch-y));
+    transform-origin: var(--origin-x) var(--origin-y);
+    will-change: top, left, transform;
+    transition: none;
+}
+
+.concentric-circles .circle-2 {
+    border-color: rgba(93, 99, 255, 0.5);
+    box-shadow: 0 0 20px rgba(93, 99, 255, 0.3), 0 0 40px rgba(93, 99, 255, 0.2), 0 0 60px rgba(93, 99, 255, 0.1);
+}
+
+.concentric-circles .circle-3 {
+    border-color: rgba(138, 43, 226, 0.4);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.25), 0 0 40px rgba(138, 43, 226, 0.15), 0 0 60px rgba(138, 43, 226, 0.08);
+}
+
+.concentric-circles .circle-4 {
+    border-color: rgba(75, 192, 192, 0.35);
+    box-shadow: 0 0 20px rgba(75, 192, 192, 0.2), 0 0 40px rgba(75, 192, 192, 0.12), 0 0 60px rgba(75, 192, 192, 0.06);
+}
+
+.concentric-circles .circle-5 {
+    border-color: rgba(255, 99, 132, 0.3);
+    box-shadow: 0 0 20px rgba(255, 99, 132, 0.18), 0 0 40px rgba(255, 99, 132, 0.1), 0 0 60px rgba(255, 99, 132, 0.05);
+}
+
+.concentric-circles .circle-1 {
+    width: 150px;
+    height: 150px;
+}
+
+.concentric-circles .circle-2 {
+    width: 500px;
+    height: 500px;
+    transition-delay: 0.05s;
+}
+
+.concentric-circles .circle-3 {
+    width: 850px;
+    height: 850px;
+    transition-delay: 0.1s;
+}
+
+.concentric-circles .circle-4 {
+    width: 1200px;
+    height: 1200px;
+    transition-delay: 0.15s;
+}
+
+.concentric-circles .circle-5 {
+    width: 1550px;
+    height: 1550px;
+    transition-delay: 0.2s;
 }
 
 #heroParticlesCanvas {
