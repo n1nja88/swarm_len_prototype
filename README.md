@@ -1,24 +1,27 @@
-# Swarmind Landing Page
+# Swarmind Landing Page (React)
 
-Лендинг для децентрализованной AI-платформы Swarmind.
+Лендинг для децентрализованной AI-платформы Swarmind на React.
 
 ## Запуск
 
 ```bash
-python -m http.server 8000
+npm install
+npm run dev
 ```
 
-Откройте `http://localhost:8000` в браузере.
+Откройте `http://localhost:3000` в браузере.
+
+## Сборка
+
+```bash
+npm run build
+```
 
 ## Особенности
 
+- React + Vite
 - Темная и светлая тема
 - Английский и русский языки
-- Анимация частиц
+- Анимация частиц на canvas
 - Адаптивный дизайн
-
-## Файлы
-
-- `index.html` - разметка
-- `styles.css` - стили
-- `script.js` - функциональность
+- Модальное окно с динамическими полями формы
