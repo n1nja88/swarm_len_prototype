@@ -15,11 +15,14 @@ export function useParticles(particleCount = 50, isLightTheme = false) {
 
         const resize = () => {
             const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
+            if (rect.width > 0 && rect.height > 0) {
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+            }
         };
 
         const initParticles = () => {
+            if (!canvas || canvas.width === 0 || canvas.height === 0) return;
             particlesRef.current = [];
             for (let i = 0; i < particleCount; i++) {
                 particlesRef.current.push({
@@ -46,6 +49,7 @@ export function useParticles(particleCount = 50, isLightTheme = false) {
         };
 
         const draw = () => {
+            if (!canvas || canvas.width === 0 || canvas.height === 0) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const lineColor = isLightTheme ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)';
@@ -87,9 +91,24 @@ export function useParticles(particleCount = 50, isLightTheme = false) {
             animationFrameRef.current = requestAnimationFrame(animate);
         };
 
-        resize();
-        initParticles();
-        animate();
+        // Инициализация с проверкой размеров
+        const init = () => {
+            resize();
+            if (canvas.width > 0 && canvas.height > 0) {
+                initParticles();
+                animate();
+            } else {
+                // Используем requestAnimationFrame для следующего кадра
+                requestAnimationFrame(() => {
+                    resize();
+                    if (canvas.width > 0 && canvas.height > 0) {
+                        initParticles();
+                        animate();
+                    }
+                });
+            }
+        };
+        init();
 
         const handleResize = () => {
             resize();

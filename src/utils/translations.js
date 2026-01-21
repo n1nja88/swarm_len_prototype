@@ -52,7 +52,17 @@ export const translations = {
         formModelUrl: 'Model URL',
         formAvgInputTokens: 'Avg Input Token Quantity (daily)',
         formAvgOutputTokens: 'Avg Output Token Quantity (daily)',
-        formAgentDescription: 'Please describe the agent you want to place'
+        formAgentDescription: 'Please describe the agent you want to place',
+        homeNav: 'Home',
+        unifiedAPINav: 'Unified API',
+        gpuRentalNav: 'GPU Rental',
+        freeInfrastructureNav: 'For Developers',
+        unifiedAPITitle: 'One API for All AI',
+        unifiedAPISubtitle: 'Unified API for all AI models',
+        gpuRentalTitle: 'Dedicated GPU Server Rental',
+        gpuRentalSubtitle: 'Rent dedicated GPU servers',
+        freeInfrastructureTitle: 'Free Infrastructure for AI Developers',
+        freeInfrastructureSubtitle: 'Free infrastructure for AI development'
     },
     ru: {
         heroTitle: 'Децентрализованная AI-Платформа',
@@ -106,7 +116,17 @@ export const translations = {
         formModelUrl: 'URL модели',
         formAvgInputTokens: 'Среднее количество входных токенов (в день)',
         formAvgOutputTokens: 'Среднее количество выходных токенов (в день)',
-        formAgentDescription: 'Опишите агента, которого вы хотите разместить'
+        formAgentDescription: 'Опишите агента, которого вы хотите разместить',
+        homeNav: 'Главная',
+        unifiedAPINav: 'Одно API для всех AI',
+        gpuRentalNav: 'Аренда GPU серверов',
+        freeInfrastructureNav: 'Для разработчиков',
+        unifiedAPITitle: 'Одно API для всех AI',
+        unifiedAPISubtitle: 'Единое API для всех AI моделей',
+        gpuRentalTitle: 'Аренда выделенных серверов с GPU',
+        gpuRentalSubtitle: 'Аренда выделенных серверов с GPU',
+        freeInfrastructureTitle: 'Бесплатная инфраструктура для AI разработчиков',
+        freeInfrastructureSubtitle: 'Бесплатная инфраструктура для разработки AI'
     }
 };
 

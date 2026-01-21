@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from './ParticleCanvas';
@@ -13,6 +14,14 @@ export function Footer({ onGetAccess }) {
             <div className="container">
                 <div className="prelaunch-content">
                     <div className="prelaunch-left">
+                        <nav className="footer-navigation">
+                            <Link to="/" className="footer-nav-link">{t('homeNav')}</Link>
+                            <Link to="/unified-api" className="footer-nav-link">{t('unifiedAPINav')}</Link>
+                            <Link to="/gpu-rental" className="footer-nav-link">{t('gpuRentalNav')}</Link>
+                            <Link to="/free-infrastructure" className="footer-nav-link">{t('freeInfrastructureNav')}</Link>
+                        </nav>
+                    </div>
+                    <div className="prelaunch-center">
                         <h2>{t('swarmind')}</h2>
                         <p className="team-description">{t('footerDescription')}</p>
                         <div className="social-links">
@@ -28,18 +37,16 @@ export function Footer({ onGetAccess }) {
                             </a>
                         </div>
                     </div>
-                    <div className="prelaunch-center">
-                        <div className="footer-links">
-                            <a href="#" className="footer-link">{t('dataPolicy')}</a>
-                            <span className="footer-separator">|</span>
-                            <a href="#" className="footer-link">{t('userAgreement')}</a>
-                        </div>
-                    </div>
                     <div className="prelaunch-right">
                         <div className="prelaunch-cta">
                             <button className="cta-button" onClick={onGetAccess}>
                                 {t('getAccess')}
                             </button>
+                        </div>
+                        <div className="footer-documents">
+                            <a href="#" className="footer-link">{t('dataPolicy')}</a>
+                            <span className="footer-separator">|</span>
+                            <a href="#" className="footer-link">{t('userAgreement')}</a>
                         </div>
                     </div>
                     <div className="prelaunch-footer-bottom">
