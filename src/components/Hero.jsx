@@ -1,4 +1,4 @@
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
 import { ParticleCanvas } from './ParticleCanvas';
 import { useTheme } from '../hooks/useTheme';
 

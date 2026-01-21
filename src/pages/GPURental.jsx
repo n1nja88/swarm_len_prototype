@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from '../components/ParticleCanvas';
 
 export function GPURental({ onGetAccess }) {
     const { t } = useLanguage();
     const { isLightTheme } = useTheme();
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     
     const whySectionRef = useRef(null);
     const [whyVisible, setWhyVisible] = useState(false);

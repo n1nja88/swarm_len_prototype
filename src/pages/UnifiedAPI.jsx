@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from '../components/ParticleCanvas';
 
@@ -7,6 +7,10 @@ export function UnifiedAPI({ onGetAccess }) {
     const { t } = useLanguage();
     const { isLightTheme } = useTheme();
     const [scrollPosition, setScrollPosition] = useState(0);
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const totalCards = 6;
     const cardsPerView = 3;
 
@@ -84,7 +88,25 @@ export function UnifiedAPI({ onGetAccess }) {
                                 </svg>
                             </div>
                             <h3 className="api-feature-title">{t('unifiedAPIFeature1Title')}</h3>
-                            <p className="api-feature-desc">{t('unifiedAPIFeature1Desc')}</p>
+                            <p className="api-feature-desc">
+                                {(() => {
+                                    const desc = t('unifiedAPIFeature1Desc');
+                                    const docText = desc.includes('Документация') ? 'Документация' : 'Documentation';
+                                    const parts = desc.split(docText);
+                                    return parts.map((part, index, array) => 
+                                        index === array.length - 1 ? (
+                                            <span key={index}>{part}</span>
+                                        ) : (
+                                            <span key={index}>
+                                                {part}
+                                                <a href="#" className="learn-more-link" onClick={(e) => e.preventDefault()}>
+                                                    {docText}
+                                                </a>
+                                            </span>
+                                        )
+                                    );
+                                })()}
+                            </p>
                         </div>
                         <div className="api-feature-card">
                             <div className="api-feature-icon">

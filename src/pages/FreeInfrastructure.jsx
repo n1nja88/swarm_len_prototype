@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from '../components/ParticleCanvas';
 
 export function FreeInfrastructure({ onGetAccess }) {
     const { t } = useLanguage();
     const { isLightTheme } = useTheme();
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     
     const projectsSectionRef = useRef(null);
     const [projectsVisible, setProjectsVisible] = useState(false);

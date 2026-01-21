@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Компонент таблицы популярных моделей
 export function ModelsTable() {

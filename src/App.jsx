@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { HomePage } from './pages/HomePage';
 import { UnifiedAPI } from './pages/UnifiedAPI';
 import { GPURental } from './pages/GPURental';
@@ -23,17 +24,19 @@ function App() {
     };
 
     return (
-        <div className="App">
-            <Routes>
-                <Route path="/" element={<HomePage onGetAccess={handleGetAccess} onLogin={handleLogin} />} />
-                <Route path="/unified-api" element={<UnifiedAPI onGetAccess={handleGetAccess} />} />
-                <Route path="/gpu-rental" element={<GPURental onGetAccess={handleGetAccess} />} />
-                <Route path="/free-infrastructure" element={<FreeInfrastructure onGetAccess={handleGetAccess} />} />
-            </Routes>
-            <Footer onGetAccess={handleGetAccess} />
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-            <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
-        </div>
+        <LanguageProvider>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<HomePage onGetAccess={handleGetAccess} onLogin={handleLogin} />} />
+                    <Route path="/unified-api" element={<UnifiedAPI onGetAccess={handleGetAccess} />} />
+                    <Route path="/gpu-rental" element={<GPURental onGetAccess={handleGetAccess} />} />
+                    <Route path="/free-infrastructure" element={<FreeInfrastructure onGetAccess={handleGetAccess} />} />
+                </Routes>
+                <Footer onGetAccess={handleGetAccess} />
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+                <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
+            </div>
+        </LanguageProvider>
     );
 }
 

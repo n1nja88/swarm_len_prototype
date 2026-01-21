@@ -1,4 +1,5 @@
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 // Компонент секции "О Swarmind"
 export function AboutSwarmind({ onGetAccess }) {
@@ -26,6 +27,9 @@ export function AboutSwarmind({ onGetAccess }) {
                             <div className="swar-card-content">
                                 <h3>{t('quickStart')}</h3>
                                 <p>{t('quickStartDesc')}</p>
+                                <Link to="/unified-api" className="learn-more-link">
+                                    {t('learnMore')}
+                                </Link>
                             </div>
                         </div>
                         <div className="swar-card">
@@ -37,6 +41,9 @@ export function AboutSwarmind({ onGetAccess }) {
                             <div className="swar-card-content">
                                 <h3>{t('infrastructureSavings')}</h3>
                                 <p>{t('infrastructureSavingsDesc')}</p>
+                                <Link to="/gpu-rental" className="learn-more-link">
+                                    {t('learnMore')}
+                                </Link>
                             </div>
                         </div>
                     </div>

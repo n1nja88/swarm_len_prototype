@@ -1,6 +1,7 @@
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from './ParticleCanvas';
+import { Link } from 'react-router-dom';
 
 // Компонент секции "Больше возможностей"
 export function MorePossibilities({ onGetAccess }) {
@@ -21,8 +22,11 @@ export function MorePossibilities({ onGetAccess }) {
                         </div>
                         <h3>{t('aiCreators')}</h3>
                         <div className="possibility-card-content">
-                            <p dangerouslySetInnerHTML={{ __html: t('aiCreatorsDesc1') }} />
+                            <p className="possibility-card-desc-first" dangerouslySetInnerHTML={{ __html: t('aiCreatorsDesc1') }} />
                             <p dangerouslySetInnerHTML={{ __html: t('aiCreatorsDesc2') }} />
+                            <Link to="/free-infrastructure" className="learn-more-link possibility-learn-more">
+                                {t('learnMore')}
+                            </Link>
                         </div>
                     </div>
                     <div className="possibility-card">
