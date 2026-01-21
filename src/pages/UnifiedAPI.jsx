@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from '../components/ParticleCanvas';
@@ -5,6 +6,52 @@ import { ParticleCanvas } from '../components/ParticleCanvas';
 export function UnifiedAPI({ onGetAccess }) {
     const { t } = useLanguage();
     const { isLightTheme } = useTheme();
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const totalCards = 6;
+    const cardsPerView = 3;
+
+    const handleScrollLeft = () => {
+        setScrollPosition(prev => Math.max(0, prev - 1));
+    };
+
+    const handleScrollRight = () => {
+        setScrollPosition(prev => Math.min(totalCards - cardsPerView, prev + 1));
+    };
+
+    const whySectionRef = useRef(null);
+    const [whyVisible, setWhyVisible] = useState(false);
+    const whyItemRefs = useRef([]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setWhyVisible(true);
+                        // Анимация для каждого элемента отдельно
+                        whyItemRefs.current.forEach((itemRef, index) => {
+                            if (itemRef) {
+                                setTimeout(() => {
+                                    itemRef.classList.add('visible');
+                                }, index * 150);
+                            }
+                        });
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (whySectionRef.current) {
+            observer.observe(whySectionRef.current);
+        }
+
+        return () => {
+            if (whySectionRef.current) {
+                observer.unobserve(whySectionRef.current);
+            }
+        };
+    }, []);
 
     return (
         <div className="page">
@@ -57,6 +104,108 @@ export function UnifiedAPI({ onGetAccess }) {
                             <h3 className="api-feature-title">{t('unifiedAPIFeature3Title')}</h3>
                             <p className="api-feature-desc">{t('unifiedAPIFeature3Desc')}</p>
                         </div>
+                    </div>
+                </div>
+            </section>
+            <section className="api-models-gallery">
+                <div className="container">
+                    <h2 className="api-models-title">{t('unifiedAPIModelsTitle')}</h2>
+                    <div className="api-models-wrapper">
+                        <button className="api-models-nav-btn api-models-nav-left" onClick={handleScrollLeft}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <div className="api-models-container">
+                            <div 
+                                className="api-models-scroll" 
+                                style={{ transform: `translateX(-${scrollPosition * (100 / cardsPerView)}%)` }}
+                            >
+                                {[...Array(6)].map((_, index) => (
+                                    <div key={index} className="api-model-card">
+                                        {/* Пустая карточка, заполним потом */}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <button className="api-models-nav-btn api-models-nav-right" onClick={handleScrollRight}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div className="api-models-cta">
+                        <button className="cta-button" onClick={onGetAccess}>
+                            {t('getAccess')}
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section className="api-why" ref={whySectionRef}>
+                <div className="container">
+                    <h2 className={`api-why-title ${whyVisible ? 'visible' : ''}`}>{t('unifiedAPIWhyTitle')}</h2>
+                    <div className="api-why-items">
+                        <div 
+                            className="api-why-item" 
+                            ref={el => whyItemRefs.current[0] = el}
+                        >
+                            <h3 className="api-why-item-title">{t('unifiedAPIWhy1Title')}</h3>
+                            <p className="api-why-item-desc">{t('unifiedAPIWhy1Desc')}</p>
+                        </div>
+                        <div 
+                            className="api-why-item"
+                            ref={el => whyItemRefs.current[1] = el}
+                        >
+                            <h3 className="api-why-item-title">{t('unifiedAPIWhy2Title')}</h3>
+                            <p className="api-why-item-desc">{t('unifiedAPIWhy2Desc')}</p>
+                        </div>
+                        <div 
+                            className="api-why-item"
+                            ref={el => whyItemRefs.current[2] = el}
+                        >
+                            <h3 className="api-why-item-title">{t('unifiedAPIWhy3Title')}</h3>
+                            <p className="api-why-item-desc">{t('unifiedAPIWhy3Desc')}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="api-how-to">
+                <div className="container">
+                    <h2 className="api-how-to-title">{t('unifiedAPIHowToTitle')}</h2>
+                    <div className="api-how-to-grid">
+                        <div className="api-how-to-card">
+                            <div className="api-how-to-icon">
+                                <span>1</span>
+                            </div>
+                            <h3 className="api-how-to-card-title">{t('unifiedAPIHowTo1Title')}</h3>
+                            <p className="api-how-to-card-desc">{t('unifiedAPIHowTo1Desc')}</p>
+                        </div>
+                        <div className="api-how-to-card">
+                            <div className="api-how-to-icon">
+                                <span>2</span>
+                            </div>
+                            <h3 className="api-how-to-card-title">{t('unifiedAPIHowTo2Title')}</h3>
+                            <p className="api-how-to-card-desc">{t('unifiedAPIHowTo2Desc')}</p>
+                        </div>
+                        <div className="api-how-to-card">
+                            <div className="api-how-to-icon">
+                                <span>3</span>
+                            </div>
+                            <h3 className="api-how-to-card-title">{t('unifiedAPIHowTo3Title')}</h3>
+                            <p className="api-how-to-card-desc">{t('unifiedAPIHowTo3Desc')}</p>
+                        </div>
+                        <div className="api-how-to-card">
+                            <div className="api-how-to-icon">
+                                <span>4</span>
+                            </div>
+                            <h3 className="api-how-to-card-title">{t('unifiedAPIHowTo4Title')}</h3>
+                            <p className="api-how-to-card-desc">{t('unifiedAPIHowTo4Desc')}</p>
+                        </div>
+                    </div>
+                    <div className="api-how-to-cta">
+                        <button className="cta-button" onClick={onGetAccess}>
+                            {t('getAccess')}
+                        </button>
                     </div>
                 </div>
             </section>
