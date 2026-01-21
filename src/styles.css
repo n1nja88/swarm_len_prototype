@@ -126,6 +126,19 @@ body {
     overflow: hidden;
 }
 
+.page .hero {
+    justify-content: flex-start !important;
+    align-items: center;
+}
+
+.page .hero .container {
+    margin: 0 auto !important;
+    max-width: 1200px !important;
+    padding: 0 20px !important;
+    width: 100% !important;
+    display: block !important;
+}
+
 .hero-background {
     position: absolute;
     top: 0;
@@ -174,6 +187,24 @@ body {
     padding: 40px 20px;
 }
 
+.page .hero-content {
+    text-align: left !important;
+    padding: 40px 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.page .hero-text {
+    text-align: left;
+    max-width: 800px;
+    margin: 0;
+    padding: 0;
+}
+
+.page .hero-buttons {
+    justify-content: flex-start;
+}
+
 .hero-text h1 {
     font-size: 3.5rem;
     font-weight: 700;
@@ -189,6 +220,17 @@ body {
     color: var(--text-primary);
     opacity: 0.9;
     animation: fadeInUp 1s ease-out 0.2s both;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: var(--text-secondary);
+    opacity: 0.9;
+    animation: fadeInUp 1s ease-out 0.3s both;
 }
 
 .hero-login-form {

@@ -26,9 +26,9 @@ function App() {
         <div className="App">
             <Routes>
                 <Route path="/" element={<HomePage onGetAccess={handleGetAccess} onLogin={handleLogin} />} />
-                <Route path="/unified-api" element={<UnifiedAPI />} />
-                <Route path="/gpu-rental" element={<GPURental />} />
-                <Route path="/free-infrastructure" element={<FreeInfrastructure />} />
+                <Route path="/unified-api" element={<UnifiedAPI onGetAccess={handleGetAccess} />} />
+                <Route path="/gpu-rental" element={<GPURental onGetAccess={handleGetAccess} />} />
+                <Route path="/free-infrastructure" element={<FreeInfrastructure onGetAccess={handleGetAccess} />} />
             </Routes>
             <Footer onGetAccess={handleGetAccess} />
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

@@ -58,11 +58,11 @@ export const translations = {
         gpuRentalNav: 'GPU Rental',
         freeInfrastructureNav: 'For Developers',
         unifiedAPITitle: 'One API for All AI',
-        unifiedAPISubtitle: 'Unified API for all AI models',
+        unifiedAPISubtitle: 'Use AI capabilities to the maximum with OpenAI-compatible Swarmind API that provides access to dozens of models and ready-made tools.',
         gpuRentalTitle: 'Dedicated GPU Server Rental',
-        gpuRentalSubtitle: 'Rent dedicated GPU servers',
+        gpuRentalSubtitle: 'Launch your server with the required GPU capacity at the best price',
         freeInfrastructureTitle: 'Free Infrastructure for AI Developers',
-        freeInfrastructureSubtitle: 'Free infrastructure for AI development'
+        freeInfrastructureSubtitle: 'Publish your solutions on our platform and make them available to a wide audience'
     },
     ru: {
         heroTitle: 'Децентрализованная AI-Платформа',
@@ -122,11 +122,11 @@ export const translations = {
         gpuRentalNav: 'Аренда GPU серверов',
         freeInfrastructureNav: 'Для разработчиков',
         unifiedAPITitle: 'Одно API для всех AI',
-        unifiedAPISubtitle: 'Единое API для всех AI моделей',
+        unifiedAPISubtitle: 'Используйте возможности AI на максимум с OpenAI-совместимым API Swarmind который дает доступ к десяткам моделей и готовым инструментам.',
         gpuRentalTitle: 'Аренда выделенных серверов с GPU',
-        gpuRentalSubtitle: 'Аренда выделенных серверов с GPU',
+        gpuRentalSubtitle: 'Запустите свой сервер с необходимым объемом GPU по самой выгодной цене',
         freeInfrastructureTitle: 'Бесплатная инфраструктура для AI разработчиков',
-        freeInfrastructureSubtitle: 'Бесплатная инфраструктура для разработки AI'
+        freeInfrastructureSubtitle: 'Публикуйте свои решения на нашей платформе и делайте их доступными широкой аудитории'
     }
 };
 

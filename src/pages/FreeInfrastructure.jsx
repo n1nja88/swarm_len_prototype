@@ -2,7 +2,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { ParticleCanvas } from '../components/ParticleCanvas';
 
-export function FreeInfrastructure() {
+export function FreeInfrastructure({ onGetAccess }) {
     const { t } = useLanguage();
     const { isLightTheme } = useTheme();
 
@@ -12,10 +12,17 @@ export function FreeInfrastructure() {
                 <div className="hero-background">
                     <ParticleCanvas particleCount={80} isLightTheme={isLightTheme} />
                 </div>
-                <div className="hero-content">
-                    <div className="hero-text">
-                        <h1>{t('freeInfrastructureTitle')}</h1>
-                        <h2>{t('freeInfrastructureSubtitle')}</h2>
+                <div className="container">
+                    <div className="hero-content">
+                        <div className="hero-text">
+                            <h1>{t('freeInfrastructureTitle')}</h1>
+                            <h2>{t('freeInfrastructureSubtitle')}</h2>
+                            <div className="hero-buttons">
+                                <button className="cta-button" onClick={onGetAccess}>
+                                    {t('getAccess')}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
