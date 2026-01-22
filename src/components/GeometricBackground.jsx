@@ -87,6 +87,22 @@ export function GeometricBackground({ type = 'hexagons' }) {
         const stretchDistance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
         return Math.min(stretchDistance / 40 * (1 + index * 0.15), 1.3);
     };
+    
+    // Для треугольников - вычисляем угол вращения на основе позиции мыши
+    const getTriangleRotation = (index) => {
+        if (type !== 'triangles') return 0;
+        // offsetX и offsetY в диапазоне примерно от -10 до 10 (в процентах)
+        // Используем их напрямую с большими коэффициентами для заметного эффекта
+        const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+        const rotationAngle = Math.atan2(offsetY, offsetX) * (180 / Math.PI);
+        // Интенсивность вращения - максимум 25 градусов, используем distance напрямую
+        const rotationIntensity = Math.min(distance * 2.5, 25);
+        const directionMultiplier = (index % 2 === 0) ? 1 : -1;
+        const intensityMultiplier = 1.5 + (index % 3) * 0.8;
+        // Формула: угол * направление * интенсивность_треугольника * (расстояние_мыши / максимум)
+        const rotation = rotationAngle * directionMultiplier * intensityMultiplier * (rotationIntensity / 25);
+        return rotation;
+    };
 
     if (type === 'hexagons') {
         // Для UnifiedAPI - сетка шестиугольников
@@ -175,13 +191,16 @@ export function GeometricBackground({ type = 'hexagons' }) {
                         const x = 150 + col * 250;
                         const y = 150 + row * 300;
                         const size = 80 + (i % 3) * 30;
-                        const rotation = (i * 45) % 360;
-                        const stretch = getStretch(i % 3 + 1);
-                        const transformX = x + offsetX * 2;
-                        const transformY = y + offsetY * 2;
+                        const baseRotation = (i * 45) % 360;
+                        // Добавляем вращение на основе позиции мыши
+                        const mouseRotation = getTriangleRotation(i);
+                        const totalRotation = baseRotation + mouseRotation;
                         
                         return (
-                            <g key={i} transform={`translate(${transformX}, ${transformY}) rotate(${rotation}) scale(${1 + stretch * 0.1})`}>
+                            <g 
+                                key={i} 
+                                transform={`translate(${x}, ${y}) rotate(${totalRotation})`}
+                            >
                                 <polygon
                                     points={`0,${-size} ${size * 0.866},${size * 0.5} ${-size * 0.866},${size * 0.5}`}
                                     fill="none"

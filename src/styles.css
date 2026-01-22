@@ -464,10 +464,6 @@ body {
     margin: 0 0 2.5rem;
 }
 
-.page-gpu-rental .hero-text h1 {
-    color: #ff6384;
-}
-
 .page-gpu-rental .hero-buttons .cta-button {
     background: linear-gradient(135deg, #d06a7a 0%, #b04d5d 100%);
     box-shadow: 0 4px 20px rgba(176, 77, 93, 0.2), 0 0 40px rgba(176, 77, 93, 0.08);
@@ -1621,31 +1617,6 @@ body.light-theme .page-unified-api-footer .prelaunch-cta .cta-button:hover {
     box-shadow: 0 6px 30px rgba(255, 99, 132, 0.25), 0 0 60px rgba(255, 99, 132, 0.12);
 }
 
-.page-gpu-rental-footer .footer-letter-1 {
-    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.5);
-    text-stroke: 2px rgba(255, 99, 132, 0.5);
-}
-
-.page-gpu-rental-footer .footer-letter-2 {
-    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.4);
-    text-stroke: 2px rgba(255, 99, 132, 0.4);
-}
-
-.page-gpu-rental-footer .footer-letter-3 {
-    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.35);
-    text-stroke: 2px rgba(255, 99, 132, 0.35);
-}
-
-.page-gpu-rental-footer .footer-letter-4 {
-    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.3);
-    text-stroke: 2px rgba(255, 99, 132, 0.3);
-}
-
-.page-gpu-rental-footer .footer-letter-5 {
-    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.5);
-    text-stroke: 2px rgba(255, 99, 132, 0.5);
-}
-
 body.light-theme .page-gpu-rental-footer .prelaunch-cta .cta-button {
     background: linear-gradient(135deg, #ff6384 0%, #d04d5d 100%);
     box-shadow: 0 4px 20px rgba(255, 99, 132, 0.2), 0 0 40px rgba(255, 99, 132, 0.08);
@@ -1654,6 +1625,43 @@ body.light-theme .page-gpu-rental-footer .prelaunch-cta .cta-button {
 body.light-theme .page-gpu-rental-footer .prelaunch-cta .cta-button:hover {
     background: linear-gradient(135deg, #ff7384 0%, #ff6384 100%);
     box-shadow: 0 6px 30px rgba(255, 99, 132, 0.25), 0 0 60px rgba(255, 99, 132, 0.12);
+}
+
+/* Тумблеры для страницы GPURental - розовый цвет */
+.page-gpu-rental-footer .theme-toggle-slider::before {
+    background: #ff6384;
+}
+
+.page-gpu-rental-footer .theme-toggle input[type="checkbox"]:checked + .theme-toggle-slider {
+    background: #ff6384;
+    border-color: #ff6384;
+}
+
+.page-gpu-rental-footer .language-toggle-slider::before {
+    background: #ff6384;
+}
+
+.page-gpu-rental-footer .language-toggle input[type="checkbox"]:checked + .language-toggle-slider {
+    background: #ff6384;
+    border-color: #ff6384;
+}
+
+body.light-theme .page-gpu-rental-footer .theme-toggle-slider::before {
+    background: #ff6384;
+}
+
+body.light-theme .page-gpu-rental-footer .theme-toggle input[type="checkbox"]:checked + .theme-toggle-slider {
+    background: #ff6384;
+    border-color: #ff6384;
+}
+
+body.light-theme .page-gpu-rental-footer .language-toggle-slider::before {
+    background: #ff6384;
+}
+
+body.light-theme .page-gpu-rental-footer .language-toggle input[type="checkbox"]:checked + .language-toggle-slider {
+    background: #ff6384;
+    border-color: #ff6384;
 }
 
 /* Футер для страницы FreeInfrastructure - бирюзовый цвет */
@@ -2609,19 +2617,38 @@ body.light-theme .select-items {
     align-items: stretch;
 }
 
-.gpu-rental-task-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 40px 35px;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.gpu-rental-tasks-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gpu-rental-tasks-title.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .gpu-rental-task-card {
-    border-color: rgba(255, 99, 132, 0.35);
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 99, 132, 0.35);
+    border-radius: 10px;
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease, all 0.3s ease;
+}
+
+.gpu-rental-task-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .gpu-rental-task-card:hover {
@@ -2662,6 +2689,22 @@ body.light-theme .select-items {
     padding: 120px 0;
     position: relative;
     border-top: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.why-triangles-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.gpu-rental-why .container {
+    position: relative;
+    z-index: 1;
 }
 
 .gpu-rental-why-title {
@@ -2732,6 +2775,42 @@ body.light-theme .select-items {
 .gpu-rental-why-item.visible .gpu-rental-why-item-desc {
     opacity: 1;
     transform: translateX(0);
+}
+
+.gpu-rental-why-divider-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin: 0;
+    opacity: 0;
+}
+
+.gpu-rental-why-divider-wrapper.visible {
+    opacity: 1;
+}
+
+.gpu-rental-why-divider {
+    height: 1px;
+    background: #ff6384;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity 2s ease 0.6s, transform 2s ease 0.6s;
+}
+
+.gpu-rental-why-divider-wrapper.visible .gpu-rental-why-divider {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Короткая линия под заголовком (левая колонка) */
+.gpu-rental-why-divider-title {
+    width: 100px;
+}
+
+/* Длинная линия под описанием (правая колонка) */
+.gpu-rental-why-divider-desc {
+    width: 100%;
 }
 
 @media (max-width: 968px) {
@@ -2841,13 +2920,23 @@ body.light-theme .select-items {
 }
 
 .gpu-rental-how-to-cta .cta-button {
-    background: linear-gradient(135deg, #d06a7a 0%, #b04d5d 100%);
-    box-shadow: 0 4px 20px rgba(176, 77, 93, 0.2), 0 0 40px rgba(176, 77, 93, 0.08);
+    background: linear-gradient(135deg, #ff6384 0%, #d04d5d 100%);
+    box-shadow: 0 4px 20px rgba(255, 99, 132, 0.2), 0 0 40px rgba(255, 99, 132, 0.08);
 }
 
 .gpu-rental-how-to-cta .cta-button:hover {
-    background: linear-gradient(135deg, #d87a8a 0%, #c05d6d 100%);
-    box-shadow: 0 6px 30px rgba(176, 77, 93, 0.25), 0 0 60px rgba(176, 77, 93, 0.12);
+    background: linear-gradient(135deg, #ff7384 0%, #ff6384 100%);
+    box-shadow: 0 6px 30px rgba(255, 99, 132, 0.25), 0 0 60px rgba(255, 99, 132, 0.12);
+}
+
+body.light-theme .gpu-rental-how-to-cta .cta-button {
+    background: linear-gradient(135deg, #ff6384 0%, #d04d5d 100%);
+    box-shadow: 0 4px 20px rgba(255, 99, 132, 0.2), 0 0 40px rgba(255, 99, 132, 0.08);
+}
+
+body.light-theme .gpu-rental-how-to-cta .cta-button:hover {
+    background: linear-gradient(135deg, #ff7384 0%, #ff6384 100%);
+    box-shadow: 0 6px 30px rgba(255, 99, 132, 0.25), 0 0 60px rgba(255, 99, 132, 0.12);
 }
 
 @media (max-width: 968px) {
