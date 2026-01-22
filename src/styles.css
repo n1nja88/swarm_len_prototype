@@ -195,6 +195,27 @@ body {
     box-shadow: 0 0 20px rgba(255, 99, 132, 0.18), 0 0 40px rgba(255, 99, 132, 0.1), 0 0 60px rgba(255, 99, 132, 0.05);
 }
 
+/* Концентрические круги для страницы UnifiedAPI - синий цвет */
+.page-unified-api .concentric-circles .circle-2 {
+    border-color: rgba(122, 128, 208, 0.5);
+    box-shadow: 0 0 20px rgba(122, 128, 208, 0.3), 0 0 40px rgba(122, 128, 208, 0.2), 0 0 60px rgba(122, 128, 208, 0.1);
+}
+
+.page-unified-api .concentric-circles .circle-3 {
+    border-color: rgba(122, 128, 208, 0.4);
+    box-shadow: 0 0 20px rgba(122, 128, 208, 0.25), 0 0 40px rgba(122, 128, 208, 0.15), 0 0 60px rgba(122, 128, 208, 0.08);
+}
+
+.page-unified-api .concentric-circles .circle-4 {
+    border-color: rgba(122, 128, 208, 0.35);
+    box-shadow: 0 0 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.12), 0 0 60px rgba(122, 128, 208, 0.06);
+}
+
+.page-unified-api .concentric-circles .circle-5 {
+    border-color: rgba(122, 128, 208, 0.3);
+    box-shadow: 0 0 20px rgba(122, 128, 208, 0.18), 0 0 40px rgba(122, 128, 208, 0.1), 0 0 60px rgba(122, 128, 208, 0.05);
+}
+
 .concentric-circles .circle-1 {
     width: 150px;
     height: 150px;
@@ -482,6 +503,26 @@ body {
 .page-free-infrastructure .hero-buttons .cta-button:hover {
     background: linear-gradient(135deg, #5bd0d0 0%, #4bc0c0 100%);
     box-shadow: 0 6px 30px rgba(75, 192, 192, 0.25), 0 0 60px rgba(75, 192, 192, 0.12);
+}
+
+.page-unified-api .hero-buttons .cta-button {
+    background: linear-gradient(135deg, #7a80d0 0%, #4d52b0 100%);
+    box-shadow: 0 4px 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.08);
+}
+
+.page-unified-api .hero-buttons .cta-button:hover {
+    background: linear-gradient(135deg, #8a90d8 0%, #5d62c0 100%);
+    box-shadow: 0 6px 30px rgba(122, 128, 208, 0.25), 0 0 60px rgba(122, 128, 208, 0.12);
+}
+
+body.light-theme .page-unified-api .hero-buttons .cta-button {
+    background: linear-gradient(135deg, #7a80d0 0%, #4d52b0 100%);
+    box-shadow: 0 4px 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.08);
+}
+
+body.light-theme .page-unified-api .hero-buttons .cta-button:hover {
+    background: linear-gradient(135deg, #8a90d8 0%, #5d62c0 100%);
+    box-shadow: 0 6px 30px rgba(122, 128, 208, 0.25), 0 0 60px rgba(122, 128, 208, 0.12);
 }
 
 .hero-description {
@@ -1562,48 +1603,23 @@ body {
 
 /* Футер для страницы UnifiedAPI - синий цвет */
 .page-unified-api-footer .prelaunch-cta .cta-button {
-    background: linear-gradient(135deg, #5d63ff 0%, #4d52b0 100%);
-    box-shadow: 0 4px 20px rgba(93, 99, 255, 0.2), 0 0 40px rgba(93, 99, 255, 0.08);
+    background: linear-gradient(135deg, #7a80d0 0%, #4d52b0 100%);
+    box-shadow: 0 4px 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.08);
 }
 
 .page-unified-api-footer .prelaunch-cta .cta-button:hover {
-    background: linear-gradient(135deg, #6f75ff 0%, #5d63ff 100%);
-    box-shadow: 0 6px 30px rgba(93, 99, 255, 0.25), 0 0 60px rgba(93, 99, 255, 0.12);
-}
-
-.page-unified-api-footer .footer-letter-1 {
-    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.5);
-    text-stroke: 2px rgba(93, 99, 255, 0.5);
-}
-
-.page-unified-api-footer .footer-letter-2 {
-    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.4);
-    text-stroke: 2px rgba(93, 99, 255, 0.4);
-}
-
-.page-unified-api-footer .footer-letter-3 {
-    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.35);
-    text-stroke: 2px rgba(93, 99, 255, 0.35);
-}
-
-.page-unified-api-footer .footer-letter-4 {
-    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.3);
-    text-stroke: 2px rgba(93, 99, 255, 0.3);
-}
-
-.page-unified-api-footer .footer-letter-5 {
-    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.5);
-    text-stroke: 2px rgba(93, 99, 255, 0.5);
+    background: linear-gradient(135deg, #8a90d8 0%, #5d62c0 100%);
+    box-shadow: 0 6px 30px rgba(122, 128, 208, 0.25), 0 0 60px rgba(122, 128, 208, 0.12);
 }
 
 body.light-theme .page-unified-api-footer .prelaunch-cta .cta-button {
-    background: linear-gradient(135deg, #5d63ff 0%, #4d52b0 100%);
-    box-shadow: 0 4px 20px rgba(93, 99, 255, 0.2), 0 0 40px rgba(93, 99, 255, 0.08);
+    background: linear-gradient(135deg, #7a80d0 0%, #4d52b0 100%);
+    box-shadow: 0 4px 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.08);
 }
 
 body.light-theme .page-unified-api-footer .prelaunch-cta .cta-button:hover {
-    background: linear-gradient(135deg, #6f75ff 0%, #5d63ff 100%);
-    box-shadow: 0 6px 30px rgba(93, 99, 255, 0.25), 0 0 60px rgba(93, 99, 255, 0.12);
+    background: linear-gradient(135deg, #8a90d8 0%, #5d62c0 100%);
+    box-shadow: 0 6px 30px rgba(122, 128, 208, 0.25), 0 0 60px rgba(122, 128, 208, 0.12);
 }
 
 /* Футер для страницы GPURental - розовый цвет */
@@ -2162,36 +2178,36 @@ body.light-theme .select-items {
 }
 
 .api-feature-card:nth-child(1) {
-    border-color: rgba(93, 99, 255, 0.4);
+    border-color: rgba(122, 128, 208, 0.4);
 }
 
 .api-feature-card:nth-child(1):hover {
     background: var(--card-hover);
-    border-color: rgba(93, 99, 255, 0.6);
+    border-color: rgba(122, 128, 208, 0.6);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(93, 99, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(122, 128, 208, 0.2);
 }
 
 .api-feature-card:nth-child(2) {
-    border-color: rgba(138, 43, 226, 0.35);
+    border-color: rgba(122, 128, 208, 0.4);
 }
 
 .api-feature-card:nth-child(2):hover {
     background: var(--card-hover);
-    border-color: rgba(138, 43, 226, 0.5);
+    border-color: rgba(122, 128, 208, 0.6);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.18);
+    box-shadow: 0 10px 30px rgba(122, 128, 208, 0.2);
 }
 
 .api-feature-card:nth-child(3) {
-    border-color: rgba(75, 192, 192, 0.3);
+    border-color: rgba(122, 128, 208, 0.4);
 }
 
 .api-feature-card:nth-child(3):hover {
     background: var(--card-hover);
-    border-color: rgba(75, 192, 192, 0.45);
+    border-color: rgba(122, 128, 208, 0.6);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(75, 192, 192, 0.15);
+    box-shadow: 0 10px 30px rgba(122, 128, 208, 0.2);
 }
 
 .api-feature-icon {
@@ -2207,18 +2223,18 @@ body.light-theme .select-items {
 }
 
 .api-feature-card:nth-child(1) .api-feature-icon {
-    background: linear-gradient(135deg, rgba(93, 99, 255, 0.2) 0%, rgba(93, 99, 255, 0.15) 100%);
-    border-color: rgba(93, 99, 255, 0.4);
+    background: linear-gradient(135deg, rgba(122, 128, 208, 0.2) 0%, rgba(122, 128, 208, 0.15) 100%);
+    border-color: rgba(122, 128, 208, 0.4);
 }
 
 .api-feature-card:nth-child(2) .api-feature-icon {
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(138, 43, 226, 0.15) 100%);
-    border-color: rgba(138, 43, 226, 0.35);
+    background: linear-gradient(135deg, rgba(122, 128, 208, 0.2) 0%, rgba(122, 128, 208, 0.15) 100%);
+    border-color: rgba(122, 128, 208, 0.4);
 }
 
 .api-feature-card:nth-child(3) .api-feature-icon {
-    background: linear-gradient(135deg, rgba(75, 192, 192, 0.2) 0%, rgba(75, 192, 192, 0.15) 100%);
-    border-color: rgba(75, 192, 192, 0.3);
+    background: linear-gradient(135deg, rgba(122, 128, 208, 0.2) 0%, rgba(122, 128, 208, 0.15) 100%);
+    border-color: rgba(122, 128, 208, 0.4);
 }
 
 .api-feature-icon svg {
@@ -2237,15 +2253,15 @@ body.light-theme .select-items {
 }
 
 .api-feature-card:nth-child(1) .api-feature-title {
-    color: #5d63ff;
+    color: #7a80d0;
 }
 
 .api-feature-card:nth-child(2) .api-feature-title {
-    color: #8a2be2;
+    color: #7a80d0;
 }
 
 .api-feature-card:nth-child(3) .api-feature-title {
-    color: #4bc0c0;
+    color: #7a80d0;
 }
 
 .api-feature-desc {
@@ -2344,12 +2360,12 @@ body.light-theme .select-items {
 
 .api-models-cta .cta-button {
     background: linear-gradient(135deg, #7a80d0 0%, #4d52b0 100%);
-    box-shadow: 0 4px 20px rgba(77, 82, 176, 0.2), 0 0 40px rgba(77, 82, 176, 0.08);
+    box-shadow: 0 4px 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.08);
 }
 
 .api-models-cta .cta-button:hover {
     background: linear-gradient(135deg, #8a90d8 0%, #5d62c0 100%);
-    box-shadow: 0 6px 30px rgba(77, 82, 176, 0.25), 0 0 60px rgba(77, 82, 176, 0.12);
+    box-shadow: 0 6px 30px rgba(122, 128, 208, 0.25), 0 0 60px rgba(122, 128, 208, 0.12);
 }
 
 @media (max-width: 968px) {
@@ -2444,10 +2460,13 @@ body.light-theme .select-items {
 .api-why-item-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #7a80d0;
     margin: 0;
     line-height: 1.6;
     padding-right: 20px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
 }
 
 .api-why-item-desc {
@@ -2456,6 +2475,50 @@ body.light-theme .select-items {
     color: var(--text-secondary);
     margin: 0;
     padding-left: 10px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.api-why-item.visible .api-why-item-desc {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.api-why-divider-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin: 0;
+    opacity: 0;
+}
+
+.api-why-divider-wrapper.visible {
+    opacity: 1;
+}
+
+.api-why-divider {
+    height: 1px;
+    background: #7a80d0;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity 2s ease 0.6s, transform 2s ease 0.6s;
+}
+
+.api-why-divider-wrapper.visible .api-why-divider {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Короткая линия под заголовком (левая колонка) */
+.api-why-divider-title {
+    width: 100px;
+}
+
+/* Длинная линия под описанием (правая колонка) */
+.api-why-divider-desc {
+    width: 100%;
 }
 
 @media (max-width: 968px) {
@@ -2491,7 +2554,7 @@ body.light-theme .select-items {
 
 .api-how-to-card {
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(122, 128, 208, 0.3);
     border-radius: 10px;
     padding: 40px 30px;
     text-align: center;
@@ -2503,21 +2566,21 @@ body.light-theme .select-items {
 
 .api-how-to-card:hover {
     background: var(--card-hover);
-    border-color: var(--border-hover);
+    border-color: rgba(122, 128, 208, 0.45);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(93, 99, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(122, 128, 208, 0.15);
 }
 
 .api-how-to-icon {
     width: 50px;
     height: 50px;
     margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, rgba(93, 99, 255, 0.15) 0%, rgba(93, 99, 255, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(122, 128, 208, 0.2) 0%, rgba(122, 128, 208, 0.15) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(122, 128, 208, 0.3);
     flex-shrink: 0;
 }
 
@@ -2537,19 +2600,19 @@ body.light-theme .select-items {
 }
 
 .api-how-to-card:nth-child(1) .api-how-to-card-title {
-    color: #5d63ff;
+    color: #7a80d0;
 }
 
 .api-how-to-card:nth-child(2) .api-how-to-card-title {
-    color: #8a2be2;
+    color: #7a80d0;
 }
 
 .api-how-to-card:nth-child(3) .api-how-to-card-title {
-    color: #4bc0c0;
+    color: #7a80d0;
 }
 
 .api-how-to-card:nth-child(4) .api-how-to-card-title {
-    color: #ff6384;
+    color: #7a80d0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2574,12 +2637,12 @@ body.light-theme .select-items {
 
 .api-how-to-cta .cta-button {
     background: linear-gradient(135deg, #7a80d0 0%, #4d52b0 100%);
-    box-shadow: 0 4px 20px rgba(77, 82, 176, 0.2), 0 0 40px rgba(77, 82, 176, 0.08);
+    box-shadow: 0 4px 20px rgba(122, 128, 208, 0.2), 0 0 40px rgba(122, 128, 208, 0.08);
 }
 
 .api-how-to-cta .cta-button:hover {
     background: linear-gradient(135deg, #8a90d8 0%, #5d62c0 100%);
-    box-shadow: 0 6px 30px rgba(77, 82, 176, 0.25), 0 0 60px rgba(77, 82, 176, 0.12);
+    box-shadow: 0 6px 30px rgba(122, 128, 208, 0.25), 0 0 60px rgba(122, 128, 208, 0.12);
 }
 
 @media (max-width: 1200px) {
