@@ -1564,6 +1564,157 @@ body {
     box-shadow: 0 6px 30px rgba(77, 82, 176, 0.25), 0 0 60px rgba(77, 82, 176, 0.12);
 }
 
+/* Футер для страницы UnifiedAPI - синий цвет */
+.page-unified-api-footer .prelaunch-cta .cta-button {
+    background: linear-gradient(135deg, #5d63ff 0%, #4d52b0 100%);
+    box-shadow: 0 4px 20px rgba(93, 99, 255, 0.2), 0 0 40px rgba(93, 99, 255, 0.08);
+}
+
+.page-unified-api-footer .prelaunch-cta .cta-button:hover {
+    background: linear-gradient(135deg, #6f75ff 0%, #5d63ff 100%);
+    box-shadow: 0 6px 30px rgba(93, 99, 255, 0.25), 0 0 60px rgba(93, 99, 255, 0.12);
+}
+
+.page-unified-api-footer .footer-letter-1 {
+    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.5);
+    text-stroke: 2px rgba(93, 99, 255, 0.5);
+}
+
+.page-unified-api-footer .footer-letter-2 {
+    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.4);
+    text-stroke: 2px rgba(93, 99, 255, 0.4);
+}
+
+.page-unified-api-footer .footer-letter-3 {
+    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.35);
+    text-stroke: 2px rgba(93, 99, 255, 0.35);
+}
+
+.page-unified-api-footer .footer-letter-4 {
+    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.3);
+    text-stroke: 2px rgba(93, 99, 255, 0.3);
+}
+
+.page-unified-api-footer .footer-letter-5 {
+    -webkit-text-stroke: 2px rgba(93, 99, 255, 0.5);
+    text-stroke: 2px rgba(93, 99, 255, 0.5);
+}
+
+body.light-theme .page-unified-api-footer .prelaunch-cta .cta-button {
+    background: linear-gradient(135deg, #5d63ff 0%, #4d52b0 100%);
+    box-shadow: 0 4px 20px rgba(93, 99, 255, 0.2), 0 0 40px rgba(93, 99, 255, 0.08);
+}
+
+body.light-theme .page-unified-api-footer .prelaunch-cta .cta-button:hover {
+    background: linear-gradient(135deg, #6f75ff 0%, #5d63ff 100%);
+    box-shadow: 0 6px 30px rgba(93, 99, 255, 0.25), 0 0 60px rgba(93, 99, 255, 0.12);
+}
+
+/* Футер для страницы GPURental - розовый цвет */
+.page-gpu-rental-footer .prelaunch-cta .cta-button {
+    background: linear-gradient(135deg, #ff6384 0%, #d04d5d 100%);
+    box-shadow: 0 4px 20px rgba(255, 99, 132, 0.2), 0 0 40px rgba(255, 99, 132, 0.08);
+}
+
+.page-gpu-rental-footer .prelaunch-cta .cta-button:hover {
+    background: linear-gradient(135deg, #ff7384 0%, #ff6384 100%);
+    box-shadow: 0 6px 30px rgba(255, 99, 132, 0.25), 0 0 60px rgba(255, 99, 132, 0.12);
+}
+
+.page-gpu-rental-footer .footer-letter-1 {
+    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.5);
+    text-stroke: 2px rgba(255, 99, 132, 0.5);
+}
+
+.page-gpu-rental-footer .footer-letter-2 {
+    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.4);
+    text-stroke: 2px rgba(255, 99, 132, 0.4);
+}
+
+.page-gpu-rental-footer .footer-letter-3 {
+    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.35);
+    text-stroke: 2px rgba(255, 99, 132, 0.35);
+}
+
+.page-gpu-rental-footer .footer-letter-4 {
+    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.3);
+    text-stroke: 2px rgba(255, 99, 132, 0.3);
+}
+
+.page-gpu-rental-footer .footer-letter-5 {
+    -webkit-text-stroke: 2px rgba(255, 99, 132, 0.5);
+    text-stroke: 2px rgba(255, 99, 132, 0.5);
+}
+
+body.light-theme .page-gpu-rental-footer .prelaunch-cta .cta-button {
+    background: linear-gradient(135deg, #ff6384 0%, #d04d5d 100%);
+    box-shadow: 0 4px 20px rgba(255, 99, 132, 0.2), 0 0 40px rgba(255, 99, 132, 0.08);
+}
+
+body.light-theme .page-gpu-rental-footer .prelaunch-cta .cta-button:hover {
+    background: linear-gradient(135deg, #ff7384 0%, #ff6384 100%);
+    box-shadow: 0 6px 30px rgba(255, 99, 132, 0.25), 0 0 60px rgba(255, 99, 132, 0.12);
+}
+
+/* Футер для страницы FreeInfrastructure - бирюзовый цвет */
+.page-free-infrastructure-footer .prelaunch-cta .cta-button {
+    background: linear-gradient(135deg, #4bc0c0 0%, #3aa0a0 100%);
+    box-shadow: 0 4px 20px rgba(75, 192, 192, 0.2), 0 0 40px rgba(75, 192, 192, 0.08);
+}
+
+.page-free-infrastructure-footer .prelaunch-cta .cta-button:hover {
+    background: linear-gradient(135deg, #5bd0d0 0%, #4bc0c0 100%);
+    box-shadow: 0 6px 30px rgba(75, 192, 192, 0.25), 0 0 60px rgba(75, 192, 192, 0.12);
+}
+
+
+body.light-theme .page-free-infrastructure-footer .prelaunch-cta .cta-button {
+    background: linear-gradient(135deg, #4bc0c0 0%, #3aa0a0 100%);
+    box-shadow: 0 4px 20px rgba(75, 192, 192, 0.2), 0 0 40px rgba(75, 192, 192, 0.08);
+}
+
+body.light-theme .page-free-infrastructure-footer .prelaunch-cta .cta-button:hover {
+    background: linear-gradient(135deg, #5bd0d0 0%, #4bc0c0 100%);
+    box-shadow: 0 6px 30px rgba(75, 192, 192, 0.25), 0 0 60px rgba(75, 192, 192, 0.12);
+}
+
+/* Тумблеры для страницы FreeInfrastructure - бирюзовый цвет */
+.page-free-infrastructure-footer .theme-toggle-slider::before {
+    background: #4bc0c0;
+}
+
+.page-free-infrastructure-footer .theme-toggle input[type="checkbox"]:checked + .theme-toggle-slider {
+    background: #4bc0c0;
+    border-color: #4bc0c0;
+}
+
+.page-free-infrastructure-footer .language-toggle-slider::before {
+    background: #4bc0c0;
+}
+
+.page-free-infrastructure-footer .language-toggle input[type="checkbox"]:checked + .language-toggle-slider {
+    background: #4bc0c0;
+    border-color: #4bc0c0;
+}
+
+body.light-theme .page-free-infrastructure-footer .theme-toggle-slider::before {
+    background: #4bc0c0;
+}
+
+body.light-theme .page-free-infrastructure-footer .theme-toggle input[type="checkbox"]:checked + .theme-toggle-slider {
+    background: #4bc0c0;
+    border-color: #4bc0c0;
+}
+
+body.light-theme .page-free-infrastructure-footer .language-toggle-slider::before {
+    background: #4bc0c0;
+}
+
+body.light-theme .page-free-infrastructure-footer .language-toggle input[type="checkbox"]:checked + .language-toggle-slider {
+    background: #4bc0c0;
+    border-color: #4bc0c0;
+}
+
 /* Modal */
 .modal {
     display: none;
@@ -3092,6 +3243,16 @@ body.light-theme .select-items {
 }
 
 .free-infrastructure-how-to-cta .cta-button:hover {
+    background: linear-gradient(135deg, #5bd0d0 0%, #4bc0c0 100%);
+    box-shadow: 0 6px 30px rgba(75, 192, 192, 0.25), 0 0 60px rgba(75, 192, 192, 0.12);
+}
+
+body.light-theme .free-infrastructure-how-to-cta .cta-button {
+    background: linear-gradient(135deg, #4bc0c0 0%, #3aa0a0 100%);
+    box-shadow: 0 4px 20px rgba(75, 192, 192, 0.2), 0 0 40px rgba(75, 192, 192, 0.08);
+}
+
+body.light-theme .free-infrastructure-how-to-cta .cta-button:hover {
     background: linear-gradient(135deg, #5bd0d0 0%, #4bc0c0 100%);
     box-shadow: 0 6px 30px rgba(75, 192, 192, 0.25), 0 0 60px rgba(75, 192, 192, 0.12);
 }

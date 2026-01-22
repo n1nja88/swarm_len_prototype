@@ -56,7 +56,7 @@ export function UnifiedAPI({ onGetAccess }) {
     }, []);
 
     return (
-        <div className="page">
+        <div className="page page-unified-api">
             <section className="hero">
                 <div className="hero-background">
                     <GeometricBackground type="hexagons" />

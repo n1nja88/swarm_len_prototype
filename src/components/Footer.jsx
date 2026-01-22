@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../hooks/useTheme';
 
@@ -6,9 +6,20 @@ import { useTheme } from '../hooks/useTheme';
 export function Footer({ onGetAccess }) {
     const { t, language, toggleLanguage } = useLanguage();
     const { isLightTheme, toggleTheme } = useTheme();
+    const location = useLocation();
+
+    // Определяем класс страницы для футера
+    let footerClass = "prelaunch";
+    if (location.pathname === "/unified-api") {
+        footerClass += " page-unified-api-footer";
+    } else if (location.pathname === "/gpu-rental") {
+        footerClass += " page-gpu-rental-footer";
+    } else if (location.pathname === "/free-infrastructure") {
+        footerClass += " page-free-infrastructure-footer";
+    }
 
     return (
-        <section className="prelaunch">
+        <section className={footerClass}>
             <div className="footer-background-text">
                 <span className="footer-letter-1">S</span>
                 <span className="footer-letter-2">W</span>
