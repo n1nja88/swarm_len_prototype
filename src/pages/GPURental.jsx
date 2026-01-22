@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { GeometricBackground } from '../components/GeometricBackground';
 
 export function GPURental({ onGetAccess }) {
     const { t } = useLanguage();
@@ -47,6 +48,7 @@ export function GPURental({ onGetAccess }) {
         <div className="page page-gpu-rental">
             <section className="hero">
                 <div className="hero-background">
+                    <GeometricBackground type="triangles" />
                 </div>
                 <div className="container">
                     <div className="hero-content">

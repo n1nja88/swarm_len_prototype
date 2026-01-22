@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { GeometricBackground } from '../components/GeometricBackground';
 
 export function UnifiedAPI({ onGetAccess }) {
     const { t } = useLanguage();
@@ -58,6 +59,7 @@ export function UnifiedAPI({ onGetAccess }) {
         <div className="page">
             <section className="hero">
                 <div className="hero-background">
+                    <GeometricBackground type="hexagons" />
                 </div>
                 <div className="container">
                     <div className="hero-content">

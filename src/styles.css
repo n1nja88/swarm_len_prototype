@@ -261,6 +261,118 @@ body {
     z-index: 1;
 }
 
+/* Геометрические фоны для других страниц */
+.geometric-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.geometric-background svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.geometric-hexagons svg {
+    opacity: 0.7;
+}
+
+.geometric-triangles svg {
+    opacity: 0.75;
+}
+
+.geometric-squares svg {
+    opacity: 0.7;
+}
+
+.geometric-assembling-squares {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+}
+
+.geometric-assembling-squares svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+}
+
+.page .hero-background {
+    height: 100vh !important;
+}
+
+/* Специфичные стили для страницы FreeInfrastructure */
+.page-free-infrastructure .hero {
+    min-height: 200vh !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+
+.page-free-infrastructure .hero-background {
+    height: 200vh !important;
+}
+
+.page-free-infrastructure .hero .container {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+}
+
+.page-free-infrastructure .hero-content {
+    min-height: 100vh !important;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.page-free-infrastructure .geometric-assembling-squares {
+    height: 200vh;
+    overflow: visible;
+}
+
+.page-free-infrastructure .geometric-assembling-squares svg {
+    height: 200vh;
+}
+
+.page-free-infrastructure .free-infrastructure-focus {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    width: 100%;
+}
+
+.page-free-infrastructure .free-infrastructure-focus .container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px 0 20px;
+    width: 100%;
+}
+
 @keyframes pulse {
     0%, 100% {
         opacity: 0.5;
@@ -1840,6 +1952,7 @@ body.light-theme .select-items {
     padding: 120px 0;
     position: relative;
     border-top: 1px solid var(--border-color);
+    z-index: 1;
 }
 
 .api-features-title {
@@ -2580,11 +2693,11 @@ body.light-theme .select-items {
 
 /* Free Infrastructure Focus Section */
 .free-infrastructure-focus {
-    background: var(--bg-primary);
-    padding: 120px 0;
+    background: transparent;
+    padding: 40px 0 0px 0;
     position: relative;
-    border-top: 1px solid var(--border-color);
 }
+
 
 .free-infrastructure-focus-title {
     font-size: 2.5rem;
@@ -2599,6 +2712,7 @@ body.light-theme .select-items {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     align-items: stretch;
+    margin-top: 150px;
 }
 
 .free-infrastructure-focus-card {
@@ -2719,9 +2833,10 @@ body.light-theme .select-items {
 /* Free Infrastructure Projects Section */
 .free-infrastructure-projects {
     background: var(--bg-primary);
-    padding: 120px 0;
+    padding: 120px 0 120px 0;
     position: relative;
     border-top: 1px solid var(--border-color);
+    margin-top: -100px;
 }
 
 .free-infrastructure-projects-title {
