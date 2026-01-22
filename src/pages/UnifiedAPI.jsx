@@ -5,7 +5,11 @@ export function UnifiedAPI({ onGetAccess }) {
     const { t } = useLanguage();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+    const [whyVisible, setWhyVisible] = useState(false);
+    const [modelsVisible, setModelsVisible] = useState(false);
     const modelsSectionRef = useRef(null);
+    const whySectionRef = useRef(null);
+    const whyItemRefs = useRef([]);
     const animationFrameRef = useRef(null);
     const targetPositionRef = useRef({ x: 50, y: 50 });
     
@@ -71,20 +75,17 @@ export function UnifiedAPI({ onGetAccess }) {
             targetPositionRef.current = { x: 50, y: 50 };
         };
 
-        const heroElement = modelsSectionRef.current;
-        if (heroElement) {
-            animationFrameRef.current = requestAnimationFrame(updatePosition);
-            window.addEventListener('mousemove', handleMouseMove, { passive: true });
-            window.addEventListener('mouseleave', handleMouseLeave);
-            
-            return () => {
-                if (animationFrameRef.current) {
-                    cancelAnimationFrame(animationFrameRef.current);
-                }
-                window.removeEventListener('mousemove', handleMouseMove);
-                window.removeEventListener('mouseleave', handleMouseLeave);
-            };
-        }
+        animationFrameRef.current = requestAnimationFrame(updatePosition);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        window.addEventListener('mouseleave', handleMouseLeave);
+        
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
+            }
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseleave', handleMouseLeave);
+        };
     }, []);
     
     const offsetX = mousePosition.x - 50;
@@ -119,6 +120,29 @@ export function UnifiedAPI({ onGetAccess }) {
     const handleScrollRight = () => {
         setScrollPosition(prev => Math.min(totalCards - cardsPerView, prev + 1));
     };
+
+    useEffect(() => {
+        const modelsObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setModelsVisible(true);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (modelsSectionRef.current) {
+            modelsObserver.observe(modelsSectionRef.current);
+        }
+
+        return () => {
+            if (modelsSectionRef.current) {
+                modelsObserver.unobserve(modelsSectionRef.current);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -236,7 +260,7 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-features">
+            <section className="api-features" style={{ background: 'transparent' }}>
                 <div className="container">
                     <h2 className="api-features-title">
                         {(() => {
@@ -321,9 +345,10 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-models-gallery" ref={modelsSectionRef}>
-                <div className="hero-background" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
-                    <div className="concentric-circles">
+            <section className="api-models-gallery" ref={modelsSectionRef} style={{ position: 'relative' }}>
+                {modelsVisible && (
+                    <div className="hero-background" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
+                        <div className="concentric-circles" style={{ zIndex: 0 }}>
                         <div 
                             className="circle circle-2"
                             style={{
@@ -369,56 +394,9 @@ export function UnifiedAPI({ onGetAccess }) {
                             }}
                         ></div>
                     </div>
-                </div>
-                <div className="hero-background" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
-                    <div className="concentric-circles">
-                        <div 
-                            className="circle circle-2"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(1) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(1) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
-                        <div 
-                            className="circle circle-3"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(2) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(2) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
-                        <div 
-                            className="circle circle-4"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(3) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(3) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
-                        <div 
-                            className="circle circle-5"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(4) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(4) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
                     </div>
-                </div>
-                <div className="container">
+                )}
+                <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <h2 className="api-models-title">
                         {(() => {
                             const title = t('unifiedAPIModelsTitle');
@@ -487,7 +465,7 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-why" ref={whySectionRef}>
+            <section className="api-why" ref={whySectionRef} style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
                 <div className="container">
                     <h2 className={`api-why-title ${whyVisible ? 'visible' : ''}`}>
                         {(() => {
@@ -560,7 +538,7 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-how-to">
+            <section className="api-how-to" style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
                 <div className="container">
                     <h2 className="api-how-to-title">
                         {(() => {

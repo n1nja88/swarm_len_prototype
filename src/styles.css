@@ -2143,7 +2143,7 @@ body.light-theme .select-items {
 }
 
 .api-features {
-    background: var(--bg-primary);
+    background: transparent;
     padding: 120px 0;
     position: relative;
     border-top: 1px solid var(--border-color);
@@ -2392,7 +2392,7 @@ body.light-theme .select-items {
 
 /* API Why Section */
 .api-why {
-    background: var(--bg-primary);
+    background: transparent;
     padding: 120px 0;
     position: relative;
     border-top: 1px solid var(--border-color);
@@ -2530,7 +2530,7 @@ body.light-theme .select-items {
 
 /* API How To Section */
 .api-how-to {
-    background: var(--bg-primary);
+    background: transparent;
     padding: 120px 0;
     position: relative;
     border-top: 1px solid var(--border-color);
