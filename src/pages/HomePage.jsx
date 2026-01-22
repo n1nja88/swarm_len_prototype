@@ -1,3 +1,7 @@
+/**
+ * Главная страница приложения
+ * Содержит Hero секцию, информацию о Swarmind, возможности платформы и таблицу моделей
+ */
 import { Hero } from '../components/Hero';
 import { AboutSwarmind } from '../components/AboutSwarmind';
 import { MorePossibilities } from '../components/MorePossibilities';

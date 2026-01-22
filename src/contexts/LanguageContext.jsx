@@ -1,3 +1,8 @@
+/**
+ * Контекст для управления языком интерфейса
+ * Поддерживает английский и русский языки
+ * Сохраняет выбранный язык в localStorage
+ */
 import { createContext, useContext, useState, useEffect } from 'react';
 import { translations } from '../utils/translations';
 

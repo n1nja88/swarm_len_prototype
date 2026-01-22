@@ -1,6 +1,10 @@
+/**
+ * Хук для управления темой приложения (светлая/темная)
+ * Сохраняет выбранную тему в localStorage
+ * Применяет класс 'light-theme' к body для переключения стилей
+ */
 import { useState, useEffect } from 'react';
 
-// Хук для управления темой (светлая/темная)
 export function useTheme() {
     const [isLightTheme, setIsLightTheme] = useState(() => {
         const saved = localStorage.getItem('theme');

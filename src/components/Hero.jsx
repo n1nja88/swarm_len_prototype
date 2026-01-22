@@ -1,20 +1,183 @@
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { ParticleCanvas } from './ParticleCanvas';
-import { useTheme } from '../hooks/useTheme';
 
 // Компонент Hero секции
 export function Hero({ onGetAccess, onLogin }) {
     const { t } = useLanguage();
-    const { isLightTheme } = useTheme();
+    const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+    const heroRef = useRef(null);
+    const animationFrameRef = useRef(null);
+    const targetPositionRef = useRef({ x: 50, y: 50 });
+
+    useEffect(() => {
+        const updatePosition = () => {
+            setMousePosition(prev => {
+                const dx = targetPositionRef.current.x - prev.x;
+                const dy = targetPositionRef.current.y - prev.y;
+                
+                // Плавная интерполяция с разной скоростью для возврата к центру
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const isReturning = Math.abs(targetPositionRef.current.x - 50) < 1 && Math.abs(targetPositionRef.current.y - 50) < 1;
+                const speed = isReturning ? 0.08 : 0.15; // Медленнее при возврате
+                
+                if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
+                    return targetPositionRef.current;
+                }
+                
+                return {
+                    x: prev.x + dx * speed,
+                    y: prev.y + dy * speed
+                };
+            });
+            
+            animationFrameRef.current = requestAnimationFrame(updatePosition);
+        };
+
+        const handleMouseMove = (e) => {
+            if (heroRef.current) {
+                const rect = heroRef.current.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                // Центр первого экрана (50vh от верха hero, т.е. rect.top + window.innerHeight / 2)
+                const centerY = rect.top + window.innerHeight / 2;
+                
+                const deltaX = e.clientX - rect.left - centerX;
+                const deltaY = e.clientY - centerY;
+                
+                const maxOffset = Math.min(rect.width, window.innerHeight) * 0.5;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                
+                let limitedDeltaX = deltaX;
+                let limitedDeltaY = deltaY;
+                
+                if (distance > maxOffset) {
+                    const ratio = maxOffset / distance;
+                    limitedDeltaX = deltaX * ratio;
+                    limitedDeltaY = deltaY * ratio;
+                }
+                
+                const offsetX = limitedDeltaX * 0.3;
+                const offsetY = limitedDeltaY * 0.3;
+                
+                targetPositionRef.current = {
+                    x: 50 + (offsetX / rect.width) * 100,
+                    y: 50 + (offsetY / window.innerHeight) * 100
+                };
+            }
+        };
+
+        const handleMouseLeave = () => {
+            targetPositionRef.current = { x: 50, y: 50 };
+        };
+
+        const heroElement = heroRef.current;
+        if (heroElement) {
+            animationFrameRef.current = requestAnimationFrame(updatePosition);
+            heroElement.addEventListener('mousemove', handleMouseMove, { passive: true });
+            heroElement.addEventListener('mouseleave', handleMouseLeave);
+            
+            return () => {
+                if (animationFrameRef.current) {
+                    cancelAnimationFrame(animationFrameRef.current);
+                }
+                heroElement.removeEventListener('mousemove', handleMouseMove);
+                heroElement.removeEventListener('mouseleave', handleMouseLeave);
+            };
+        }
+    }, []);
+
+    // Вычисляем смещение от центра (50%)
+    const offsetX = mousePosition.x - 50;
+    const offsetY = mousePosition.y - 50;
+    
+    // Радиусы кругов в процентах (приблизительно)
+    // circle-1: 150px, circle-2: 500px
+    // При ширине экрана ~1400px: circle-1 ~10.7%, circle-2 ~35.7%
+    const circle1Radius = 10.7;
+    const circle2Radius = 35.7;
+    
+    // Ограничиваем позицию circle-1, чтобы он не выходил за границы circle-2
+    const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+    const maxDistance = circle2Radius - circle1Radius - 1; // -1 для небольшого отступа
+    
+    let limitedOffsetX = offsetX;
+    let limitedOffsetY = offsetY;
+    
+    if (distance > maxDistance) {
+        const ratio = maxDistance / distance;
+        limitedOffsetX = offsetX * ratio;
+        limitedOffsetY = offsetY * ratio;
+    }
+    
+    // Вычисляем растяжение для каждого круга (уменьшено)
+    const getStretch = (index) => {
+        const stretchDistance = Math.sqrt(limitedOffsetX * limitedOffsetX + limitedOffsetY * limitedOffsetY);
+        return Math.min(stretchDistance / 30 * (1 + index * 0.2), 1.5);
+    };
 
     return (
-        <section className="hero">
+        <section className="hero" ref={heroRef}>
             <div className="hero-background">
-                <ParticleCanvas particleCount={80} isLightTheme={isLightTheme} />
+                <div className="concentric-circles">
+                    <div 
+                        className="circle circle-2"
+                        style={{
+                            '--mouse-x': '50%',
+                            '--mouse-y': '50%',
+                            '--stretch-x': `${1 + getStretch(1) * Math.abs(limitedOffsetX) / 100}`,
+                            '--stretch-y': `${1 + getStretch(1) * Math.abs(limitedOffsetY) / 100}`,
+                            '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
+                            '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
+                        }}
+                    ></div>
+                    <div 
+                        className="circle circle-3"
+                        style={{
+                            '--mouse-x': '50%',
+                            '--mouse-y': '50%',
+                            '--stretch-x': `${1 + getStretch(2) * Math.abs(limitedOffsetX) / 100}`,
+                            '--stretch-y': `${1 + getStretch(2) * Math.abs(limitedOffsetY) / 100}`,
+                            '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
+                            '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
+                        }}
+                    ></div>
+                    <div 
+                        className="circle circle-4"
+                        style={{
+                            '--mouse-x': '50%',
+                            '--mouse-y': '50%',
+                            '--stretch-x': `${1 + getStretch(3) * Math.abs(limitedOffsetX) / 100}`,
+                            '--stretch-y': `${1 + getStretch(3) * Math.abs(limitedOffsetY) / 100}`,
+                            '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
+                            '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
+                        }}
+                    ></div>
+                    <div 
+                        className="circle circle-5"
+                        style={{
+                            '--mouse-x': '50%',
+                            '--mouse-y': '50%',
+                            '--stretch-x': `${1 + getStretch(4) * Math.abs(limitedOffsetX) / 100}`,
+                            '--stretch-y': `${1 + getStretch(4) * Math.abs(limitedOffsetY) / 100}`,
+                            '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
+                            '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
+                        }}
+                    ></div>
+                </div>
             </div>
             <div className="hero-content">
                 <div className="hero-text">
-                    <h1>{t('heroTitle')}</h1>
+                    <h1>
+                        {t('heroTitle').split('AI-Platform').map((part, i, arr) => 
+                            i === arr.length - 1 ? (
+                                <span key={i}>{part}</span>
+                            ) : (
+                                <span key={i}>
+                                    {part}
+                                    <span className="accent-text">AI-Platform</span>
+                                </span>
+                            )
+                        )}
+                    </h1>
                     <h2>{t('heroSubtitle')}</h2>
                     <div className="hero-buttons">
                         <button className="cta-button" onClick={onGetAccess}>
