@@ -1,3 +1,8 @@
+/**
+ * Страница "Free Infrastructure for AI Developers"
+ * Информация о бесплатной инфраструктуре для разработчиков AI
+ * Включает анимацию собирающихся квадратов
+ */
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AssemblingSquares } from '../components/AssemblingSquares';

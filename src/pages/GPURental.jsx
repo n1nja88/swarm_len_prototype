@@ -1,3 +1,8 @@
+/**
+ * Страница "GPU Rental"
+ * Информация об аренде GPU серверов
+ * Включает анимацию треугольников, реагирующих на движение мыши
+ */
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 

@@ -1,3 +1,8 @@
+/**
+ * Страница "One API for All AI"
+ * Демонстрирует возможности единого API для доступа к различным AI-моделям
+ * Включает анимацию концентрических кругов с орбитальными частицами
+ */
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
