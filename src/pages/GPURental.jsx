@@ -44,7 +44,7 @@ export function GPURental({ onGetAccess }) {
     }, []);
 
     return (
-        <div className="page">
+        <div className="page page-gpu-rental">
             <section className="hero">
                 <div className="hero-background">
                 </div>

@@ -1,14 +1,33 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 
 // Компонент секции "Больше возможностей"
 export function MorePossibilities({ onGetAccess }) {
     const { t } = useLanguage();
+    const [showDivider, setShowDivider] = useState(false);
+    const btnRef = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!btnRef.current) return;
+            const btnRect = btnRef.current.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            // Показываем разделитель когда кнопка видна на экране
+            setShowDivider(btnRect.top < viewportHeight);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <section className="more-possibilities">
             <div className="container">
-                <h2 className="section-title">{t('morePossibilities')}</h2>
+                <h2 className="section-title">
+                    More <span className="accent-text">possibilities</span>
+                </h2>
                 <div className="possibilities-grid">
                     <div className="possibility-card">
                         <div className="possibility-card-icon">
@@ -39,11 +58,14 @@ export function MorePossibilities({ onGetAccess }) {
                     </div>
                 </div>
                 <div className="possibilities-cta">
-                    <button className="cta-button" onClick={onGetAccess}>
+                    <button className="cta-button" onClick={onGetAccess} ref={btnRef}>
                         {t('getAccess')}
                     </button>
                 </div>
             </div>
+            
+            {/* Разделительная линия */}
+            <div className={`section-divider ${showDivider ? 'visible' : ''}`}></div>
         </section>
     );
 }

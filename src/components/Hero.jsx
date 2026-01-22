@@ -15,14 +15,18 @@ export function Hero({ onGetAccess, onLogin }) {
                 const dx = targetPositionRef.current.x - prev.x;
                 const dy = targetPositionRef.current.y - prev.y;
                 
-                // Плавная интерполяция
-                if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+                // Плавная интерполяция с разной скоростью для возврата к центру
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const isReturning = Math.abs(targetPositionRef.current.x - 50) < 1 && Math.abs(targetPositionRef.current.y - 50) < 1;
+                const speed = isReturning ? 0.08 : 0.15; // Медленнее при возврате
+                
+                if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
                     return targetPositionRef.current;
                 }
                 
                 return {
-                    x: prev.x + dx * 0.15,
-                    y: prev.y + dy * 0.15
+                    x: prev.x + dx * speed,
+                    y: prev.y + dy * speed
                 };
             });
             
@@ -33,12 +37,13 @@ export function Hero({ onGetAccess, onLogin }) {
             if (heroRef.current) {
                 const rect = heroRef.current.getBoundingClientRect();
                 const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
+                // Центр первого экрана (50vh от верха hero, т.е. rect.top + window.innerHeight / 2)
+                const centerY = rect.top + window.innerHeight / 2;
                 
                 const deltaX = e.clientX - rect.left - centerX;
-                const deltaY = e.clientY - rect.top - centerY;
+                const deltaY = e.clientY - centerY;
                 
-                const maxOffset = Math.min(rect.width, rect.height) * 0.5;
+                const maxOffset = Math.min(rect.width, window.innerHeight) * 0.5;
                 const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
                 
                 let limitedDeltaX = deltaX;
@@ -50,12 +55,12 @@ export function Hero({ onGetAccess, onLogin }) {
                     limitedDeltaY = deltaY * ratio;
                 }
                 
-                const offsetX = limitedDeltaX * 0.5;
-                const offsetY = limitedDeltaY * 0.5;
+                const offsetX = limitedDeltaX * 0.3;
+                const offsetY = limitedDeltaY * 0.3;
                 
                 targetPositionRef.current = {
                     x: 50 + (offsetX / rect.width) * 100,
-                    y: 50 + (offsetY / rect.height) * 100
+                    y: 50 + (offsetY / window.innerHeight) * 100
                 };
             }
         };
@@ -103,10 +108,10 @@ export function Hero({ onGetAccess, onLogin }) {
         limitedOffsetY = offsetY * ratio;
     }
     
-    // Вычисляем растяжение для каждого круга (увеличено)
+    // Вычисляем растяжение для каждого круга (уменьшено)
     const getStretch = (index) => {
         const stretchDistance = Math.sqrt(limitedOffsetX * limitedOffsetX + limitedOffsetY * limitedOffsetY);
-        return Math.min(stretchDistance / 20 * (1 + index * 0.3), 2);
+        return Math.min(stretchDistance / 30 * (1 + index * 0.2), 1.5);
     };
 
     return (
@@ -161,7 +166,18 @@ export function Hero({ onGetAccess, onLogin }) {
             </div>
             <div className="hero-content">
                 <div className="hero-text">
-                    <h1>{t('heroTitle')}</h1>
+                    <h1>
+                        {t('heroTitle').split('AI-Platform').map((part, i, arr) => 
+                            i === arr.length - 1 ? (
+                                <span key={i}>{part}</span>
+                            ) : (
+                                <span key={i}>
+                                    {part}
+                                    <span className="accent-text">AI-Platform</span>
+                                </span>
+                            )
+                        )}
+                    </h1>
                     <h2>{t('heroSubtitle')}</h2>
                     <div className="hero-buttons">
                         <button className="cta-button" onClick={onGetAccess}>
