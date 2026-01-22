@@ -58,8 +58,8 @@ export function GPURental({ onGetAccess }) {
                     limitedDeltaY = deltaY * ratio;
                 }
                 
-                const offsetX = limitedDeltaX * 0.25;
-                const offsetY = limitedDeltaY * 0.25;
+                const offsetX = limitedDeltaX * 0.2;
+                const offsetY = limitedDeltaY * 0.2;
                 
                 targetPositionRef.current = {
                     x: 50 + (offsetX / rect.width) * 100,

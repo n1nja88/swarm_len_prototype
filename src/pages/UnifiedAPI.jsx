@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export function UnifiedAPI({ onGetAccess }) {
@@ -7,11 +7,14 @@ export function UnifiedAPI({ onGetAccess }) {
     const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
     const [whyVisible, setWhyVisible] = useState(false);
     const [modelsVisible, setModelsVisible] = useState(false);
+    const [circleCenterY, setCircleCenterY] = useState(null);
+    const [orbitingParticles, setOrbitingParticles] = useState([]);
     const modelsSectionRef = useRef(null);
     const whySectionRef = useRef(null);
     const whyItemRefs = useRef([]);
     const animationFrameRef = useRef(null);
     const targetPositionRef = useRef({ x: 50, y: 50 });
+    const particlesAnimationRef = useRef(null);
     
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -25,7 +28,7 @@ export function UnifiedAPI({ onGetAccess }) {
                 
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const isReturning = Math.abs(targetPositionRef.current.x - 50) < 1 && Math.abs(targetPositionRef.current.y - 50) < 1;
-                const speed = isReturning ? 0.08 : 0.15;
+                const speed = isReturning ? 0.05 : 0.08; // Более плавная анимация
                 
                 if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
                     return targetPositionRef.current;
@@ -108,8 +111,181 @@ export function UnifiedAPI({ onGetAccess }) {
     
     const getStretch = (index) => {
         const stretchDistance = Math.sqrt(limitedOffsetX * limitedOffsetX + limitedOffsetY * limitedOffsetY);
-        return Math.min(stretchDistance / 30 * (1 + index * 0.2), 1.5);
+        // Более плавное растяжение с меньшей интенсивностью
+        return Math.min(stretchDistance / 40 * (1 + index * 0.15), 1.2);
     };
+    
+    // Создаем 14 кругов с разными радиусами (без самого внутреннего) - используем useMemo для оптимизации
+    const circles = useMemo(() => {
+        const circleCount = 14;
+        const baseRadius = 200; // Самый маленький радиус (круг 2, после удаления круга 1)
+        const maxRadius = 3000; // Самый большой радиус (круг 15)
+        const radiusDifference = maxRadius - baseRadius; // Разница между радиусами
+        const increasedDifference = radiusDifference * 1.3; // Увеличиваем на 30%
+        
+        return Array.from({ length: circleCount }, (_, i) => {
+            // Радиусы от маленького к большому (круг 2 - самый маленький, круг 15 - самый большой)
+            const radius = baseRadius + increasedDifference * (i / (circleCount - 1));
+            return {
+                index: i + 2, // Начинаем с индекса 2 (круг 2)
+                radius: radius,
+                stretchIndex: i
+            };
+        });
+    }, []);
+    
+    // Функция для получения цвета круга
+    const getCircleColor = (circleIndex) => {
+        const colorIndex = (circleIndex - 2) % 4;
+        switch (colorIndex) {
+            case 0: return 'rgba(93, 99, 255, 0.8)'; // Синий
+            case 1: return 'rgba(138, 43, 226, 0.8)'; // Фиолетовый
+            case 2: return 'rgba(75, 192, 192, 0.8)'; // Бирюзовый
+            case 3: return 'rgba(255, 99, 132, 0.8)'; // Розовый
+            default: return 'rgba(93, 99, 255, 0.8)';
+        }
+    };
+    
+    // Инициализация частиц для каждого круга
+    useEffect(() => {
+        if (!circles || circles.length === 0) return;
+        
+        const particles = [];
+        circles.forEach((circle) => {
+            const particlesPerCircle = 3; // Фиксируем 3 частицы для быстрой загрузки
+            for (let i = 0; i < particlesPerCircle; i++) {
+                const initialAngle = (Math.PI * 2 / particlesPerCircle) * i;
+                // Гарантируем разные направления: чередуем направления для столкновений
+                const direction = i % 2 === 0 ? 1 : -1; // Четные - по часовой, нечетные - против
+                const colorIndex = (circle.index - 2) % 4;
+                let color;
+                switch (colorIndex) {
+                    case 0: color = 'rgba(93, 99, 255, 0.8)'; break;
+                    case 1: color = 'rgba(138, 43, 226, 0.8)'; break;
+                    case 2: color = 'rgba(75, 192, 192, 0.8)'; break;
+                    case 3: color = 'rgba(255, 99, 132, 0.8)'; break;
+                    default: color = 'rgba(93, 99, 255, 0.8)';
+                }
+                particles.push({
+                    circleIndex: circle.index,
+                    radius: circle.radius,
+                    angle: initialAngle,
+                    angularVelocity: 0.5 * direction, // Постоянная скорость для всех частиц
+                    size: 8, // Фиксированный размер для оптимизации
+                    color: color
+                });
+            }
+        });
+        setOrbitingParticles(particles);
+    }, [circles]);
+    
+    // Анимация частиц
+    useEffect(() => {
+        if (orbitingParticles.length === 0) {
+            if (particlesAnimationRef.current) {
+                cancelAnimationFrame(particlesAnimationRef.current);
+                particlesAnimationRef.current = null;
+            }
+            return;
+        }
+        
+        let isRunning = true;
+        
+        const animate = () => {
+            if (!isRunning) return;
+            
+            setOrbitingParticles(prev => {
+                if (prev.length === 0) return prev;
+                
+                const updated = prev.map(particle => {
+                    // Обновляем угол с увеличенной скоростью
+                    let newAngle = particle.angle + particle.angularVelocity * 0.02; // Увеличили множитель скорости
+                    
+                    // Нормализуем угол
+                    if (newAngle > Math.PI * 2) newAngle -= Math.PI * 2;
+                    if (newAngle < 0) newAngle += Math.PI * 2;
+                    
+                    return { ...particle, angle: newAngle };
+                });
+                
+                // Оптимизированная проверка столкновений - группируем по кругам
+                const particlesByCircle = {};
+                updated.forEach((p, idx) => {
+                    if (!particlesByCircle[p.circleIndex]) {
+                        particlesByCircle[p.circleIndex] = [];
+                    }
+                    particlesByCircle[p.circleIndex].push({ particle: p, index: idx });
+                });
+                
+                Object.values(particlesByCircle).forEach(circleParticles => {
+                    if (circleParticles.length < 2) return;
+                    
+                    for (let i = 0; i < circleParticles.length; i++) {
+                        for (let j = i + 1; j < circleParticles.length; j++) {
+                            const p1 = circleParticles[i].particle;
+                            const p2 = circleParticles[j].particle;
+                            const idx1 = circleParticles[i].index;
+                            const idx2 = circleParticles[j].index;
+                            
+                            // Вычисляем угловое расстояние
+                            let angleDiff = p1.angle - p2.angle;
+                            
+                            // Нормализуем разницу углов в диапазон [-PI, PI]
+                            if (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+                            else if (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+                            
+                            const absAngleDiff = Math.abs(angleDiff);
+                            
+                            // Минимальное расстояние для столкновения
+                            const particleSize = Math.max(p1.size, p2.size);
+                            const minDistance = (particleSize * 2) / p1.radius + 0.05;
+                            
+                            if (absAngleDiff < minDistance) {
+                                const collisionDirection = angleDiff > 0 ? 1 : -1;
+                                
+                                // Мягкое столкновение
+                                const tempVel = updated[idx1].angularVelocity;
+                                updated[idx1].angularVelocity = -updated[idx2].angularVelocity * 0.7;
+                                updated[idx2].angularVelocity = -tempVel * 0.7;
+                                
+                                // Раздвигаем частицы
+                                const safeDistance = minDistance * 1.2;
+                                let midAngle = (updated[idx1].angle + updated[idx2].angle) / 2;
+                                if (midAngle < 0) midAngle += Math.PI * 2;
+                                else if (midAngle > Math.PI * 2) midAngle -= Math.PI * 2;
+                                
+                                updated[idx1].angle = midAngle + safeDistance / 2 * collisionDirection;
+                                updated[idx2].angle = midAngle - safeDistance / 2 * collisionDirection;
+                                
+                                // Нормализуем углы
+                                if (updated[idx1].angle < 0) updated[idx1].angle += Math.PI * 2;
+                                else if (updated[idx1].angle > Math.PI * 2) updated[idx1].angle -= Math.PI * 2;
+                                if (updated[idx2].angle < 0) updated[idx2].angle += Math.PI * 2;
+                                else if (updated[idx2].angle > Math.PI * 2) updated[idx2].angle -= Math.PI * 2;
+                            }
+                        }
+                    }
+                });
+                
+                return updated;
+            });
+            
+            if (isRunning) {
+                particlesAnimationRef.current = requestAnimationFrame(animate);
+            }
+        };
+        
+        particlesAnimationRef.current = requestAnimationFrame(animate);
+        
+        return () => {
+            isRunning = false;
+            if (particlesAnimationRef.current) {
+                cancelAnimationFrame(particlesAnimationRef.current);
+                particlesAnimationRef.current = null;
+            }
+        };
+    }, [orbitingParticles.length]);
+    
     const totalCards = 6;
     const cardsPerView = 3;
 
@@ -122,11 +298,19 @@ export function UnifiedAPI({ onGetAccess }) {
     };
 
     useEffect(() => {
+        const updateCircleCenter = () => {
+            if (modelsSectionRef.current) {
+                const rect = modelsSectionRef.current.getBoundingClientRect();
+                setCircleCenterY(rect.top + rect.height / 2);
+            }
+        };
+
         const modelsObserver = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         setModelsVisible(true);
+                        updateCircleCenter();
                     }
                 });
             },
@@ -135,12 +319,18 @@ export function UnifiedAPI({ onGetAccess }) {
 
         if (modelsSectionRef.current) {
             modelsObserver.observe(modelsSectionRef.current);
+            updateCircleCenter();
         }
+
+        window.addEventListener('scroll', updateCircleCenter, { passive: true });
+        window.addEventListener('resize', updateCircleCenter, { passive: true });
 
         return () => {
             if (modelsSectionRef.current) {
                 modelsObserver.unobserve(modelsSectionRef.current);
             }
+            window.removeEventListener('scroll', updateCircleCenter);
+            window.removeEventListener('resize', updateCircleCenter);
         };
     }, []);
 
@@ -221,7 +411,7 @@ export function UnifiedAPI({ onGetAccess }) {
                                 {(() => {
                                     const subtitle = t('unifiedAPISubtitle');
                                     const highlightWords = (text) => {
-                                        const wordsToHighlight = ['Fast', 'simple', 'AI', 'Быстрый', 'простой', 'AI'];
+                                        const wordsToHighlight = ['Fast', 'simple', 'Быстрый', 'простой'];
                                         const parts = [];
                                         let lastIndex = 0;
                                         const regex = new RegExp(`\\b(${wordsToHighlight.join('|')})\\b`, 'gi');
@@ -260,7 +450,7 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-features" style={{ background: 'transparent' }}>
+            <section className="api-features">
                 <div className="container">
                     <h2 className="api-features-title">
                         {(() => {
@@ -345,57 +535,72 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-models-gallery" ref={modelsSectionRef} style={{ position: 'relative' }}>
-                {modelsVisible && (
-                    <div className="hero-background" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
-                        <div className="concentric-circles" style={{ zIndex: 0 }}>
-                        <div 
-                            className="circle circle-2"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(1) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(1) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
-                        <div 
-                            className="circle circle-3"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(2) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(2) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
-                        <div 
-                            className="circle circle-4"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(3) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(3) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
-                        <div 
-                            className="circle circle-5"
-                            style={{
-                                '--mouse-x': '50%',
-                                '--mouse-y': '50%',
-                                '--stretch-x': `${1 + getStretch(4) * Math.abs(limitedOffsetX) / 100}`,
-                                '--stretch-y': `${1 + getStretch(4) * Math.abs(limitedOffsetY) / 100}`,
-                                '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
-                                '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center'
-                            }}
-                        ></div>
+            <section className="api-models-gallery" ref={modelsSectionRef} style={{ position: 'relative', overflow: 'visible' }}>
+                <div className="hero-background" style={{ 
+                        position: 'fixed', 
+                        top: 0, 
+                        left: 0, 
+                        width: '100%', 
+                        height: '100vh', 
+                        zIndex: 0, 
+                        pointerEvents: 'none',
+                        overflow: 'visible'
+                    }}>
+                        <div className="concentric-circles" style={{ 
+                            position: 'absolute',
+                            top: circleCenterY !== null ? `${circleCenterY}px` : '50vh',
+                            left: '150%', // Центр за правой границей экрана, внутренний круг не виден
+                            transform: 'translate(-50%, -50%)',
+                            width: '100%',
+                            height: '200vh',
+                            zIndex: 0
+                        }}>
+                            {circles.map((circle) => (
+                                <div 
+                                    key={circle.index}
+                                    className={`circle circle-${circle.index}`}
+                                    style={{
+                                        '--mouse-x': '50%',
+                                        '--mouse-y': '50%',
+                                        '--stretch-x': `${1 + getStretch(circle.stretchIndex) * Math.abs(limitedOffsetX) / 100}`,
+                                        '--stretch-y': `${1 + getStretch(circle.stretchIndex) * Math.abs(limitedOffsetY) / 100}`,
+                                        '--origin-x': limitedOffsetX > 0 ? 'left' : limitedOffsetX < 0 ? 'right' : 'center',
+                                        '--origin-y': limitedOffsetY > 0 ? 'top' : limitedOffsetY < 0 ? 'bottom' : 'center',
+                                        width: `${circle.radius * 2}px`,
+                                        height: `${circle.radius * 2}px`
+                                    }}
+                                >
+                                    {orbitingParticles
+                                        .filter(p => p.circleIndex === circle.index)
+                                        .map((particle, idx) => {
+                                            const centerX = circle.radius;
+                                            const centerY = circle.radius;
+                                            const x = centerX + Math.cos(particle.angle) * particle.radius;
+                                            const y = centerY + Math.sin(particle.angle) * particle.radius;
+                                            
+                                            return (
+                                                <div
+                                                    key={`${circle.index}-${idx}`}
+                                                    className="orbiting-particle"
+                                                    style={{
+                                                        position: 'absolute',
+                                                        left: `${x}px`,
+                                                        top: `${y}px`,
+                                                        width: `${particle.size}px`,
+                                                        height: `${particle.size}px`,
+                                                        borderRadius: '50%',
+                                                        backgroundColor: particle.color,
+                                                        transform: 'translate(-50%, -50%)',
+                                                        boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
+                                                        pointerEvents: 'none'
+                                                    }}
+                                                />
+                                            );
+                                        })}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    </div>
-                )}
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <h2 className="api-models-title">
                         {(() => {
@@ -465,7 +670,7 @@ export function UnifiedAPI({ onGetAccess }) {
                     </div>
                 </div>
             </section>
-            <section className="api-why" ref={whySectionRef} style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
+            <section className="api-why" ref={whySectionRef} style={{ position: 'relative', zIndex: 1 }}>
                 <div className="container">
                     <h2 className={`api-why-title ${whyVisible ? 'visible' : ''}`}>
                         {(() => {

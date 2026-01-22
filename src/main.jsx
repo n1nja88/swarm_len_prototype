@@ -1,3 +1,7 @@
+/**
+ * Точка входа в приложение
+ * Инициализирует React приложение и настраивает роутинг
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
