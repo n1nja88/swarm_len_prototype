@@ -62,16 +62,46 @@ export function FreeInfrastructure({ onGetAccess }) {
                                         ? ' for AI Developers' 
                                         : ' для AI разработчиков';
                                     const parts = title.split(separator);
+                                    
+                                    // Функция для покраски "Infrastructure" и "AI"
+                                    const highlightWords = (text) => {
+                                        // Разбиваем текст, сохраняя разделители
+                                        const regex = /(Infrastructure|AI|Инфраструктура)/gi;
+                                        const matches = [];
+                                        let lastIndex = 0;
+                                        let match;
+                                        
+                                        while ((match = regex.exec(text)) !== null) {
+                                            if (match.index > lastIndex) {
+                                                matches.push({ text: text.substring(lastIndex, match.index), isHighlight: false });
+                                            }
+                                            matches.push({ text: match[0], isHighlight: true });
+                                            lastIndex = regex.lastIndex;
+                                        }
+                                        
+                                        if (lastIndex < text.length) {
+                                            matches.push({ text: text.substring(lastIndex), isHighlight: false });
+                                        }
+                                        
+                                        return matches.map((item, i) => 
+                                            item.isHighlight ? (
+                                                <span key={i} style={{ color: '#4bc0c0' }}>{item.text}</span>
+                                            ) : (
+                                                <span key={i}>{item.text}</span>
+                                            )
+                                        );
+                                    };
+                                    
                                     if (parts.length > 1) {
                                         return (
                                             <>
-                                                {parts[0]}
+                                                {highlightWords(parts[0])}
                                                 <br />
-                                                <span>{separator}</span>
+                                                {highlightWords(separator)}
                                             </>
                                         );
                                     }
-                                    return title;
+                                    return highlightWords(title);
                                 })()}
                             </h1>
                             <h2>
@@ -105,7 +135,22 @@ export function FreeInfrastructure({ onGetAccess }) {
                 </div>
                 <section className="free-infrastructure-focus">
                     <div className="container">
-                        <h2 className="free-infrastructure-focus-title">{t('freeInfrastructureFocusTitle')}</h2>
+                        <h2 className="free-infrastructure-focus-title">
+                            {(() => {
+                                const title = t('freeInfrastructureFocusTitle');
+                                // Разбиваем по запятой: "Focus on development, we'll take care of everything else"
+                                const parts = title.split(',');
+                                if (parts.length > 1) {
+                                    return (
+                                        <>
+                                            <span style={{ color: '#4bc0c0' }}>{parts[0]}</span>
+                                            <span>, {parts.slice(1).join(',')}</span>
+                                        </>
+                                    );
+                                }
+                                return title;
+                            })()}
+                        </h2>
                         <div className="free-infrastructure-focus-grid">
                             <div className="free-infrastructure-focus-card">
                                 <div className="free-infrastructure-focus-icon">
@@ -140,27 +185,113 @@ export function FreeInfrastructure({ onGetAccess }) {
             </section>
             <section className="free-infrastructure-projects" ref={projectsSectionRef}>
                 <div className="container">
-                    <h2 className={`free-infrastructure-projects-title ${projectsVisible ? 'visible' : ''}`}>{t('freeInfrastructureProjectsTitle')}</h2>
+                    <h2 className={`free-infrastructure-projects-title ${projectsVisible ? 'visible' : ''}`}>
+                        {(() => {
+                            const title = t('freeInfrastructureProjectsTitle');
+                            // Покрасить "projects" и "interested" в бирюзовый цвет
+                            const highlightWords = (text) => {
+                                const regex = /(projects|interested|проекты|интересны)/gi;
+                                const matches = [];
+                                let lastIndex = 0;
+                                let match;
+                                
+                                while ((match = regex.exec(text)) !== null) {
+                                    if (match.index > lastIndex) {
+                                        matches.push({ text: text.substring(lastIndex, match.index), isHighlight: false });
+                                    }
+                                    matches.push({ text: match[0], isHighlight: true });
+                                    lastIndex = regex.lastIndex;
+                                }
+                                
+                                if (lastIndex < text.length) {
+                                    matches.push({ text: text.substring(lastIndex), isHighlight: false });
+                                }
+                                
+                                return matches.map((item, i) => 
+                                    item.isHighlight ? (
+                                        <span key={i} style={{ color: '#4bc0c0' }}>{item.text}</span>
+                                    ) : (
+                                        <span key={i}>{item.text}</span>
+                                    )
+                                );
+                            };
+                            return highlightWords(title);
+                        })()}
+                    </h2>
                     <div className="free-infrastructure-projects-items">
                         <div 
                             className="free-infrastructure-projects-item" 
                             ref={el => projectsItemRefs.current[0] = el}
                         >
-                            <h3 className="free-infrastructure-projects-item-title">{t('freeInfrastructureProject1Title')}</h3>
+                            <h3 className="free-infrastructure-projects-item-title">
+                                {(() => {
+                                    const title = t('freeInfrastructureProject1Title');
+                                    // Покрасить "Generative" в бирюзовый
+                                    const regex = /(Generative|Генеративные)/gi;
+                                    const parts = title.split(regex);
+                                    return parts.map((part, i) => 
+                                        regex.test(part) ? (
+                                            <span key={i} style={{ color: '#4bc0c0' }}>{part}</span>
+                                        ) : (
+                                            <span key={i}>{part}</span>
+                                        )
+                                    );
+                                })()}
+                            </h3>
                             <p className="free-infrastructure-projects-item-desc">{t('freeInfrastructureProject1Desc')}</p>
+                        </div>
+                        <div 
+                            className={`free-infrastructure-projects-divider-wrapper ${projectsVisible ? 'visible' : ''}`}
+                        >
+                            <div className="free-infrastructure-projects-divider free-infrastructure-projects-divider-title"></div>
+                            <div className="free-infrastructure-projects-divider free-infrastructure-projects-divider-desc"></div>
                         </div>
                         <div 
                             className="free-infrastructure-projects-item"
                             ref={el => projectsItemRefs.current[1] = el}
                         >
-                            <h3 className="free-infrastructure-projects-item-title">{t('freeInfrastructureProject2Title')}</h3>
+                            <h3 className="free-infrastructure-projects-item-title">
+                                {(() => {
+                                    const title = t('freeInfrastructureProject2Title');
+                                    // Покрасить "Applied" в бирюзовый
+                                    const regex = /(Applied|Прикладные)/gi;
+                                    const parts = title.split(regex);
+                                    return parts.map((part, i) => 
+                                        regex.test(part) ? (
+                                            <span key={i} style={{ color: '#4bc0c0' }}>{part}</span>
+                                        ) : (
+                                            <span key={i}>{part}</span>
+                                        )
+                                    );
+                                })()}
+                            </h3>
                             <p className="free-infrastructure-projects-item-desc">{t('freeInfrastructureProject2Desc')}</p>
+                        </div>
+                        <div 
+                            className={`free-infrastructure-projects-divider-wrapper ${projectsVisible ? 'visible' : ''}`}
+                        >
+                            <div className="free-infrastructure-projects-divider free-infrastructure-projects-divider-title"></div>
+                            <div className="free-infrastructure-projects-divider free-infrastructure-projects-divider-desc"></div>
                         </div>
                         <div 
                             className="free-infrastructure-projects-item"
                             ref={el => projectsItemRefs.current[2] = el}
                         >
-                            <h3 className="free-infrastructure-projects-item-title">{t('freeInfrastructureProject3Title')}</h3>
+                            <h3 className="free-infrastructure-projects-item-title">
+                                {(() => {
+                                    const title = t('freeInfrastructureProject3Title');
+                                    // Покрасить "Tools", "for" и "developers" в бирюзовый
+                                    const regex = /(Tools|for|developers|Инструменты|для|разработчиков)/gi;
+                                    const parts = title.split(regex);
+                                    return parts.map((part, i) => 
+                                        regex.test(part) ? (
+                                            <span key={i} style={{ color: '#4bc0c0' }}>{part}</span>
+                                        ) : (
+                                            <span key={i}>{part}</span>
+                                        )
+                                    );
+                                })()}
+                            </h3>
                             <p className="free-infrastructure-projects-item-desc">{t('freeInfrastructureProject3Desc')}</p>
                         </div>
                     </div>
@@ -168,7 +299,21 @@ export function FreeInfrastructure({ onGetAccess }) {
             </section>
             <section className="free-infrastructure-how-to">
                 <div className="container">
-                    <h2 className="free-infrastructure-how-to-title">{t('freeInfrastructureHowToTitle')}</h2>
+                    <h2 className="free-infrastructure-how-to-title">
+                        {(() => {
+                            const title = t('freeInfrastructureHowToTitle');
+                            // Покрасить "How to place a project" в бирюзовый
+                            const regex = /(How to place a project|Как разместить проект)/gi;
+                            const parts = title.split(regex);
+                            return parts.map((part, i) => 
+                                regex.test(part) ? (
+                                    <span key={i} style={{ color: '#4bc0c0' }}>{part}</span>
+                                ) : (
+                                    <span key={i}>{part}</span>
+                                )
+                            );
+                        })()}
+                    </h2>
                     <div className="free-infrastructure-how-to-grid">
                         <div className="free-infrastructure-how-to-card">
                             <div className="free-infrastructure-how-to-icon">
